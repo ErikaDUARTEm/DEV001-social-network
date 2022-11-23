@@ -13,3 +13,4 @@ export const Router = () => {
     divRoot.appendChild(Register());
   }
 };
+
