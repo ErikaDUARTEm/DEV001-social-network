@@ -68,3 +68,4 @@ export const Register = () => {
 
   return registerDiv;
 };
+
