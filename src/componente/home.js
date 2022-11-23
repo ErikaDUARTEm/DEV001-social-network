@@ -2,6 +2,7 @@
 
 export const Home = () => {
   const HomeDiv = document.createElement('section');
+  HomeDiv.classList.add('sectionHome');
   HomeDiv.innerHTML = `
   <article class = "plantilla">
    <div class= "imagenes">
