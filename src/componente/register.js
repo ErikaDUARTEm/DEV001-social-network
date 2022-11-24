@@ -1,5 +1,4 @@
 import { singup } from '../lib/auth.js';
-// import { auth } from '../lib/firebase.js';
 
 export const Register = () => {
   const registerDiv = document.createElement('section');
@@ -17,11 +16,9 @@ export const Register = () => {
     <input type = "text" id = "email" class= "form-register" placeholder = "Correo Electrónico"><br>
     <input type = "text" id= "name" class= "form-register" placeholder = "Nombre completo"><br>
     <input type = "text" id= "userName" class= "form-register" placeholder = "Nombre de usuario"><br>
-    <input type = "text" id= "password" class= "form-register" placeholder = "Contraseña"><br>
-    <input type = "text" id= "repetPassword" class= "form-register" placeholder = "Repetir contraseña"><br>
-    </form>
+    <input type = "password" id= "password" class= "form-register" placeholder = "Contraseña"><br>
+   </form>
   </div>
-
   <p class= "mensaje" > Al registrarte, aceptas nuestras Condiciones,<br> la Política de privacidad y la Política de cookies. </p>
   </article>`;
 
@@ -45,7 +42,7 @@ export const Register = () => {
   registerDiv.appendChild(backHome);
 
   const singupElemnt = registerDiv.querySelector('.buttonRegister');
-  singupElemnt.addEventListener('click', (e) => {
+  singupElemnt.addEventListener('click', () => {
     const email = registerDiv.querySelector('#email').value;
     const password = registerDiv.querySelector('#password').value;
     const promise = singup(email, password);
@@ -53,6 +50,7 @@ export const Register = () => {
     promise
       .then((userCredential) => {
         const user = userCredential.user;
+        alert('Bienvenido a Down Family ahora puedes iniciar sesión');
         console.log(user);
       })
 
@@ -61,6 +59,12 @@ export const Register = () => {
         const errorMessage = error.message;
         if (errorCode.includes('auth/email-already-in-use')) {
           alert('Tu email ya se encuentra registrado');
+        }
+        if (errorCode.includes('auth/internal-error')) {
+          alert('Correo inválido')
+        }
+        if (errorCode.includes('auth/weak-password')) {
+          alert('La contraseña debe tener al menos 6 caracteres')
         }
         console.log(errorCode, errorMessage);
       });
