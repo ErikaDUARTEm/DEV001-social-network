@@ -1,4 +1,4 @@
-// import { onNavigate } from "../main.js";
+import { signIn } from '../lib/auth.js';
 
 export const Home = () => {
   const HomeDiv = document.createElement('section');
@@ -10,8 +10,8 @@ export const Home = () => {
     <img class="girl" src="img/una.png" alt="">
    </div>
    <div>
-    <input type = "text" class= "user" placeholder = "Usuario o Correo Electrónico">
-    <input type = "password" class= "user" placeholder = "Contraseña">
+    <input type = "text" class= "user" id="email" placeholder = "Usuario o Correo Electrónico">
+    <input type = "password" class= "user" id="password"  placeholder = "Contraseña">
   </div>
   </article>
  `;
@@ -55,8 +55,32 @@ export const Home = () => {
   HomeDiv.appendChild(register);
 
   buttonLogin.addEventListener('click', () => {
-    window.location.hash = '#Register';
+    const email = HomeDiv.querySelector('#email').value;
+    const password = HomeDiv.querySelector('#password').value;
+    const signIn2 = signIn(email, password);
+
+    signIn2
+      .then((userCredential) => {
+        const user = userCredential.user;
+        if (user) {
+          window.location.hash = '#Muro';
+          console.log(user);
+        }
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        if (errorCode.includes('auth/user-not-found')) {
+          alert('El correo electrónico que ingresaste no está conectado a una cuenta.');
+        }
+        if (errorCode.includes('auth/wrong-password')) {
+          alert('La contraseña que ingresaste es inválida');
+        }
+        if (errorCode.includes('auth/invalid-email')) {
+          alert('El correo electrónico es inválido');
+        }
+        console.log(errorCode, errorMessage);
+      });
   });
   return HomeDiv;
-  
 };

@@ -1,6 +1,6 @@
 import { Home } from './home.js';
 import { Register } from './register.js';
-//import { Muro } from './muro.js';
+import { Muro } from './muro.js';
 
 export const Router = () => {
   const divRoot = document.getElementById('root');
@@ -11,6 +11,7 @@ export const Router = () => {
     divRoot.appendChild(Home());
   } else if (hash === '#Register') {
     divRoot.appendChild(Register());
+  } else if (hash === '#Muro') {
+    divRoot.appendChild(Muro());
   }
 };
-
