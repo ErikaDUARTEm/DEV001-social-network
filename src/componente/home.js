@@ -1,4 +1,4 @@
-import { signIn } from '../lib/auth.js';
+import { signIn, signInGoogle } from '../lib/auth.js';
 
 export const Home = () => {
   const HomeDiv = document.createElement('section');
@@ -27,6 +27,7 @@ export const Home = () => {
 
   const linkGoogle = document.createElement('a');
   linkGoogle.setAttribute('href', '');
+  linkGoogle.classList.add('linkGoogle');
   linkGoogle.textContent = 'Continuar con tu cuenta en Google';
 
   google.appendChild(imgGoogle);
@@ -74,12 +75,31 @@ export const Home = () => {
           alert('El correo electrónico que ingresaste no está conectado a una cuenta.');
         }
         if (errorCode.includes('auth/wrong-password')) {
-          alert('La contraseña que ingresaste es inválida');
+          alert('La contraseña que ingresaste es inválida.');
         }
         if (errorCode.includes('auth/invalid-email')) {
-          alert('El correo electrónico es inválido');
+          alert('El correo electrónico es inválido.');
         }
         console.log(errorCode, errorMessage);
+      });
+  });
+  const signInWithGoogle = HomeDiv.querySelector('.linkGoogle');
+  signInWithGoogle.addEventListener('click', (e) => {
+    e.preventDefault();
+    const promiseGoogle = signInGoogle();
+    promiseGoogle
+      .then(() => {
+        window.location.hash = '#Muro';
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        console.log(error);
+        if (errorCode.includes('auth/popup-closed-by-user')) {
+          alert('La ventana se cerró inesperadamente.');
+        }
+        if (errorCode.includes('auth/cancelled-popup-request')) {
+          alert('La solicitud fue cancelada');
+        }
       });
   });
   return HomeDiv;
