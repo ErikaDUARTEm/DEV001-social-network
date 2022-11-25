@@ -1,4 +1,4 @@
-import { signIn, signInGoogle } from '../lib/auth.js';
+import { signIn, signInGoogle, resetPassword } from '../lib/auth.js';
 
 export const Home = () => {
   const HomeDiv = document.createElement('section');
@@ -10,8 +10,8 @@ export const Home = () => {
     <img class="girl" src="img/una.png" alt="">
    </div>
    <div>
-    <input type = "text" class= "user" id="email" placeholder = "Usuario o Correo Electrónico">
-    <input type = "password" class= "user" id="password"  placeholder = "Contraseña">
+    <input type = "text" class= "user emailPassword" id="email" placeholder = "Usuario o Correo Electrónico">
+    <input type = "text" class= "user" id="password"  placeholder = "Contraseña">
   </div>
   </article>
  `;
@@ -36,6 +36,7 @@ export const Home = () => {
 
   const linkPassword = document.createElement('a');
   linkPassword.classList.add('enlaces');
+  linkPassword.classList.add('resetPassword');
   linkPassword.setAttribute('href', '');
   linkPassword.textContent = '¿Olvidaste tu contraseña?';
   HomeDiv.appendChild(linkPassword);
@@ -78,7 +79,10 @@ export const Home = () => {
           alert('La contraseña que ingresaste es inválida.');
         }
         if (errorCode.includes('auth/invalid-email')) {
-          alert('El correo electrónico es inválido.');
+          alert('Debes ingresar tu correo y contraseña para iniciar sesión');
+        }
+        if (errorCode.includes('auth/internal-error')) {
+          alert('Debes ingresar tu contraseña para iniciar sesión');
         }
         console.log(errorCode, errorMessage);
       });
@@ -102,5 +106,32 @@ export const Home = () => {
         }
       });
   });
+
+  const reset = HomeDiv.querySelector('.resetPassword');
+  reset.addEventListener('click', (e) => {
+    e.preventDefault();
+    const email = HomeDiv.querySelector('.emailPassword').value;
+    const newPassword = resetPassword(email);
+    newPassword
+      .then(() => {
+        alert('Te enviamos un correo de restablecimiento de contraseña, revisa tu correo electrónico!');
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        if (errorCode.includes('auth/missing-email')) {
+          alert('Introduce el correo electrónico con el que te registrarte.');
+        }
+        if (errorCode.includes('auth/invalid-email')) {
+          alert('El correo electrónico es inválido, por favor ingresa un correo válido.');
+        }
+        if (errorCode.includes('auth/user-not-found')) {
+          alert('El correo no está registrado, por favor registrate para iniciar sesión.');
+        }
+        console.log(errorCode);
+      });
+
+    console.log(email, newPassword);
+  });
+
   return HomeDiv;
 };
