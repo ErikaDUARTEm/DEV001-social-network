@@ -9,12 +9,33 @@ export const Home = () => {
     <img class="logo" src="img/logo.png" alt="">
     <img class="girl" src="img/una.png" alt="">
    </div>
-   <div>
+  <div>
+    <form class = "formHome">
     <input type = "text" class= "user emailPassword" id="email" placeholder = "Usuario o Correo Electrónico">
-    <input type = "text" class= "user" id="password"  placeholder = "Contraseña">
+    <div class = "userPassword">
+    <span class = "icon-eyes">
+    <i class="fa-solid fa-eye-slash" ></i>
+    </span>
+    <input type = "password" class= "user" id="password"  placeholder = "Contraseña">
+    </div>
+    </form>
   </div>
+ 
   </article>
  `;
+  const eyes = HomeDiv.querySelector('.icon-eyes');
+  eyes.addEventListener('click', () => {
+    const icon = HomeDiv.querySelector('i');
+    if (eyes.nextElementSibling.type === 'password') {
+      eyes.nextElementSibling.type = 'text';
+      icon.classList.remove('fa-eye-slash');
+      icon.classList.add('fa-eye');
+    }else {
+      eyes.nextElementSibling.type = 'password';
+      icon.classList.remove('fa-eye');
+      icon.classList.add('fa-eye-slash');
+    }
+  });
   const buttonLogin = document.createElement('button');
   buttonLogin.id = 'btn-login';
   buttonLogin.textContent = 'Iniciar sesión';

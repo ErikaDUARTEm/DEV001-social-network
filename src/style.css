@@ -67,8 +67,26 @@ img.girl {
     font-family: 'Fira Sans Condensed', sans-serif;
     text-align: center;
     background: rgb(253, 251, 172);
-    margin-top: 40px;   
+    margin-top: 40px;
+      
 }
+.userPassword {
+position: relative;
+
+}
+.fa-solid {
+position: absolute;
+right: 25px;
+top:50%;
+transform: translateY(-50%);
+cursor: pointer;
+transition: 0.4s ease all ;
+}
+.fa-solid:hover {
+color:#1B6FB6
+    }
+
+
 
 .form-register {
     display: flex;
