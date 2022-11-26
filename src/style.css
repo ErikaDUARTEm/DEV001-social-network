@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:ital,wght@1,200&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@300&display=swap');
-body {  
+
+body {
     margin: 0;
     padding: 0;
 }
@@ -12,10 +13,11 @@ main {
     height: auto;
     padding: 0;
     margin: 0;
+
 }
 
 section {
-    
+
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -23,7 +25,7 @@ section {
     object-fit: contain;
     margin: 20px 20px 20px 20px;
     padding: 0;
-    border:  1px solid #1B6FB6;
+    border: 1px solid #1B6FB6;
 }
 
 .plantilla {
@@ -47,8 +49,8 @@ img.logo {
     width: 100%;
     height: auto;
     margin-top: 40px;
-    
-}   
+
+}
 
 img.girl {
     width: 50%;
@@ -63,28 +65,31 @@ img.girl {
     width: 80vh;
     border-radius: 30px;
     height: 50px;
-    font-size: 30px;
+    font-size: 20px;
     font-family: 'Fira Sans Condensed', sans-serif;
     text-align: center;
     background: rgb(253, 251, 172);
     margin-top: 40px;
-      
-}
-.userPassword {
-position: relative;
 
 }
-.fa-solid {
-position: absolute;
-right: 25px;
-top:50%;
-transform: translateY(-50%);
-cursor: pointer;
-transition: 0.4s ease all ;
+
+.userPassword {
+    position: relative;
+
 }
+
+.fa-solid {
+    position: absolute;
+    right: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    transition: 0.4s ease all;
+}
+
 .fa-solid:hover {
-color:#1B6FB6
-    }
+    color: #1B6FB6
+}
 
 
 
@@ -109,21 +114,35 @@ button {
     border-radius: 30px;
     background: #1B6FB6;
     color: white;
+    }
+button:active {
+    transform: translate 0.04;
+    background-color:#558ab5 ;
+    transition: 0.2s ease all;
+   
 }
 
-.mensaje  {
+.mensaje {
     font-size: 30px;
     font-family: 'Fira Sans Condensed', sans-serif;
-    padding: 30px 30px ;
+    padding: 30px 30px;
     margin: 0;
     text-align: center;
-    
+
 
 }
+
 .enlaces {
     font-size: 30px;
     font-family: 'Fira Sans Condensed', sans-serif;
     margin-top: 50px;
+}
+a{
+color:#1B6FB6;
+text-decoration: none;
+}
+a:hover{
+color: black;
 }
 
 .enlaces1 {
@@ -135,6 +154,59 @@ button {
 .sectionHome {
     padding: 60px 0 100px 0;
 }
-.sectionRegister{
+
+.sectionRegister {
     padding: 60px 0 30px 0;
-}   
+}
+
+@media screen and (min-width:1024px) {
+
+    body {
+        background-image: url(img/social.png);
+        background-repeat: no-repeat;
+        background-size: auto;
+        
+    }
+    
+    main {
+        position: absolute;
+        right: -180px;
+        top: 49.9%;
+        transform: translateY(-50%);
+    }
+
+    section {
+        background-color: rgba(255, 255, 255, 0.783);
+        display: flex;
+        padding: 0;
+        border-radius: 10px;
+        box-shadow: 0 0 20px 5px #1B6FB6;
+        
+
+    }
+
+    .sectionHome {
+        padding: 10px 0 20px 0;
+        width: 65%;
+    }
+    .user {
+        width: 50vh;
+    }
+
+    .enlaces {
+        margin-top: 25px;
+        
+    }
+
+  .sectionRegister {
+        padding: 10px 0 20px 0;
+        width: 65%;
+    }
+
+    .form-register {
+        width: 50vh;
+    }
+    .buttonRegister{
+     margin-top: 0;
+    }
+}
