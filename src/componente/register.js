@@ -16,11 +16,29 @@ export const Register = () => {
     <input type = "text" id = "email" class= "form-register" placeholder = "Correo Electrónico"><br>
     <input type = "text" id= "name" class= "form-register" placeholder = "Nombre completo"><br>
     <input type = "text" id= "userName" class= "form-register" placeholder = "Nombre de usuario"><br>
-    <input type = "password" id= "password" class= "form-register" placeholder = "Contraseña"><br>
-   </form>
+    <div class = "userPassword">
+    <span class = "icon-eyes">
+    <i class="fa-solid fa-eye-slash" ></i>
+    </span>
+    <input type = "password" id= "password" class= "form-register" placeholder = "Contraseña">
+    </div>
+  </form>
   </div>
   <p class= "mensaje" > Al registrarte, aceptas nuestras Condiciones,<br> la Política de privacidad y la Política de cookies. </p>
   </article>`;
+  const eyes1 = registerDiv.querySelector('.icon-eyes');
+  eyes1.addEventListener('click', () => {
+    const icon = registerDiv.querySelector('i');
+    if (eyes1.nextElementSibling.type === 'password') {
+      eyes1.nextElementSibling.type = 'text';
+      icon.classList.remove('fa-eye-slash');
+      icon.classList.add('fa-eye');
+    }else {
+      eyes1.nextElementSibling.type = 'password';
+      icon.classList.remove('fa-eye');
+      icon.classList.add('fa-eye-slash');
+    }
+  });
 
   const buttonRegister = document.createElement('button');
   buttonRegister.textContent = 'Registrate';
