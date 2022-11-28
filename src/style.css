@@ -4,6 +4,7 @@
 body {
     margin: 0;
     padding: 0;
+    
 }
 
 main {
@@ -26,6 +27,7 @@ section {
     margin: 20px 20px 20px 20px;
     padding: 0;
     border: 1px solid #1B6FB6;
+ 
 }
 
 .plantilla {
@@ -116,7 +118,7 @@ button {
     color: white;
     }
 button:active {
-    transform: translate 0.04;
+    transform: scale(.9);
     background-color:#558ab5 ;
     transition: 0.2s ease all;
    
@@ -165,6 +167,7 @@ color: black;
         background-image: url(img/social.png);
         background-repeat: no-repeat;
         background-size: auto;
+  
         
     }
     
@@ -188,6 +191,7 @@ color: black;
     .sectionHome {
         padding: 10px 0 20px 0;
         width: 65%;
+        block-size: 850px;
     }
     .user {
         width: 50vh;
@@ -201,6 +205,7 @@ color: black;
   .sectionRegister {
         padding: 10px 0 20px 0;
         width: 65%;
+        block-size: 850px;
     }
 
     .form-register {
