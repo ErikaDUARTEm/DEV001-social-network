@@ -2,15 +2,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@300&display=swap');
 
 body {
+    display: flex;
     margin: 0;
     padding: 0;
-    
+    width: 100vw;
+    height: auto;
 }
-
 main {
     display: flex;
     flex-direction: column;
-    width: 100vh;
+    width: 100vw;
     height: auto;
     padding: 0;
     margin: 0;
@@ -64,14 +65,14 @@ img.girl {
 .user {
     display: flex;
     flex-direction: column;
-    width: 80vh;
+    width: 80vw;
     border-radius: 30px;
-    height: 50px;
+    height: 30px;
     font-size: 20px;
     font-family: 'Fira Sans Condensed', sans-serif;
     text-align: center;
     background: rgb(253, 251, 172);
-    margin-top: 40px;
+    margin-top: 30px;
 
 }
 
@@ -93,25 +94,22 @@ img.girl {
     color: #1B6FB6
 }
 
-
-
 .form-register {
     display: flex;
     flex-direction: column;
-    width: 60vh;
-    height: 40px;
-    font-size: 30px;
+    width: 60vw;
+    height: 30px;
+    font-size: 15px;
     font-family: 'Fira Sans Condensed', sans-serif;
     text-align: center;
     background: rgb(253, 251, 172)
 }
 
-
 button {
-    width: 40vh;
-    margin-top: 40px;
-    height: 60px;
-    font-size: 30px;
+    width: 40vw;
+    margin-top: 30px;
+    height: 40px;
+    font-size: 15px;
     font-family: 'Fira Sans Condensed', sans-serif;
     border-radius: 30px;
     background: #1B6FB6;
@@ -125,93 +123,137 @@ button:active {
 }
 
 .mensaje {
-    font-size: 30px;
+    font-size: 17px;
     font-family: 'Fira Sans Condensed', sans-serif;
-    padding: 30px 30px;
+    padding: 20px 10px 0 10px;
     margin: 0;
     text-align: center;
-
-
 }
 
 .enlaces {
-    font-size: 30px;
+    position: relative;
+    font-size: 20px;
     font-family: 'Fira Sans Condensed', sans-serif;
-    margin-top: 50px;
+    margin-top: 20px;
+    padding: 3px 3px;
 }
-a{
-color:#1B6FB6;
-text-decoration: none;
+.enlaces img {
+    width: 25px;
+    right: 230px;
+    position:absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+a {
+  color:#1B6FB6;
+  text-decoration: none;
 }
 a:hover{
-color: black;
+  color: black;
 }
 
 .enlaces1 {
-    font-size: 30px;
+    font-size: 17px;
     font-family: 'Fira Sans Condensed', sans-serif;
-    margin-top: 20px;
+    padding: 10px 10px;
 }
-
-.sectionHome {
-    padding: 60px 0 100px 0;
+.message{
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
-
-.sectionRegister {
-    padding: 60px 0 30px 0;
+.error-message {
+    display: none;
+    color: red;
+    background-color: rgb(253, 189, 189);
+    border: 1px solid red;
+    margin:0;
+    padding: 20px 20px;
+    text-align: center;
+    font-size: 20px;
+    font-family: 'Fira Sans Condensed', sans-serif;
+}
+.message-welcome {
+    margin: 2px 2px 2px 2px;
+    color: green;
+    display: none;
+    background-color: rgb(164, 244, 172);
+    border: 1px solid green;
+    padding: 20px 20px;
+    text-align: center;
+    font-size: 20px;
+    font-family: 'Fira Sans Condensed', sans-serif;
 }
 
 @media screen and (min-width:1024px) {
 
     body {
+
         background-image: url(img/social.png);
-        background-repeat: no-repeat;
-        background-size: auto;
-  
-        
+        background-repeat:no-repeat;
+        background-size: 100%;  
+       
     }
     
-    main {
-        position: absolute;
-        right: -180px;
-        top: 49.9%;
-        transform: translateY(-50%);
-    }
-
     section {
+        margin: 15px 0 10px 700px;
         background-color: rgba(255, 255, 255, 0.783);
         display: flex;
         padding: 0;
         border-radius: 10px;
         box-shadow: 0 0 20px 5px #1B6FB6;
-        
-
     }
 
     .sectionHome {
+        margin-top: 15px;
         padding: 10px 0 20px 0;
-        width: 65%;
-        block-size: 850px;
+        width: 30%;
+       
+    }
+    .images {
+        margin: 20px 20px 0 20px;
+    }
+    .images p.mensaje{
+        margin: 0 0 15px 0;
+        padding: 0;
+    }
+    img.logo{
+        margin-top: 0;
     }
     .user {
-        width: 50vh;
+        width: 280px;
+        height: 30px;
     }
-
-    .enlaces {
-        margin-top: 25px;
-        
+    button {
+        width: 150px;
+        height: 40px;
     }
-
-  .sectionRegister {
+    .enlaces{
+        margin-top: 10px;
+        padding: 0;
+    }
+    .enlaces img {
+        right: 220px;
+    }
+    .enlaces1{
+        padding: 5px 5px;
+    }
+    p.border {
+        margin: 10px;
+    }
+    .sectionRegister {
+        margin-top: 15px;
         padding: 10px 0 20px 0;
-        width: 65%;
-        block-size: 850px;
+        width: 30%;
+   
     }
-
     .form-register {
-        width: 50vh;
+       width: 280px;
+       height: 30px;
     }
     .buttonRegister{
-     margin-top: 0;
+     margin-top:10px;
     }
+    
 }

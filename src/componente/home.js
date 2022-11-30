@@ -1,10 +1,14 @@
 import { signIn, signInGoogle, resetPassword } from '../lib/auth.js';
+import {showErrorMessage } from './Alert.js';
 
 export const Home = () => {
   const HomeDiv = document.createElement('section');
   HomeDiv.classList.add('sectionHome');
   HomeDiv.innerHTML = `
-  <article class = "plantilla">
+  <div class='message'>
+  <span class="error-message" id="error-message"></span>
+  </div>
+  <div class = "plantilla">
    <div class= "images">
     <img class="logo" src="img/logo.png" alt="">
     <img class="girl" src="img/una.png" alt="">
@@ -21,7 +25,7 @@ export const Home = () => {
     </form>
   </div>
  
-  </article>
+  </div>
  `;
   const eyes = HomeDiv.querySelector('.icon-eyes');
   eyes.addEventListener('click', () => {
@@ -30,7 +34,7 @@ export const Home = () => {
       eyes.nextElementSibling.type = 'text';
       icon.classList.remove('fa-eye-slash');
       icon.classList.add('fa-eye');
-    }else {
+    } else {
       eyes.nextElementSibling.type = 'password';
       icon.classList.remove('fa-eye');
       icon.classList.add('fa-eye-slash');
@@ -49,7 +53,7 @@ export const Home = () => {
   const linkGoogle = document.createElement('a');
   linkGoogle.setAttribute('href', '');
   linkGoogle.classList.add('linkGoogle');
-  linkGoogle.textContent = 'Continuar con tu cuenta en Google';
+  linkGoogle.textContent = 'Inicia con tu cuenta Google';
 
   google.appendChild(imgGoogle);
   google.appendChild(linkGoogle);
@@ -77,6 +81,8 @@ export const Home = () => {
   register.appendChild(parrafo2);
   HomeDiv.appendChild(register);
 
+  const idSpan = HomeDiv.querySelector('#error-message');
+
   buttonLogin.addEventListener('click', () => {
     const email = HomeDiv.querySelector('#email').value;
     const password = HomeDiv.querySelector('#password').value;
@@ -92,20 +98,18 @@ export const Home = () => {
       })
       .catch((error) => {
         const errorCode = error.code;
-        const errorMessage = error.message;
         if (errorCode.includes('auth/user-not-found')) {
-          alert('El correo electrónico que ingresaste no está conectado a una cuenta.');
+          showErrorMessage('El correo electrónico que ingresaste no está conectado a una cuenta.', idSpan);
         }
         if (errorCode.includes('auth/wrong-password')) {
-          alert('La contraseña que ingresaste es inválida.');
+          showErrorMessage('La contraseña que ingresaste es inválida.', idSpan);
         }
         if (errorCode.includes('auth/invalid-email')) {
-          alert('Debes ingresar tu correo y contraseña para iniciar sesión');
+          showErrorMessage('Debes ingresar tu correo y contraseña para iniciar sesión o verifica que el correo electrónico es válido.', idSpan);
         }
         if (errorCode.includes('auth/internal-error')) {
-          alert('Debes ingresar tu contraseña para iniciar sesión');
+          showErrorMessage('Debes ingresar tu contraseña para iniciar sesión.', idSpan);
         }
-        console.log(errorCode, errorMessage);
       });
   });
   const signInWithGoogle = HomeDiv.querySelector('.linkGoogle');
@@ -118,12 +122,11 @@ export const Home = () => {
       })
       .catch((error) => {
         const errorCode = error.code;
-        console.log(error);
         if (errorCode.includes('auth/popup-closed-by-user')) {
-          alert('La ventana se cerró inesperadamente.');
+          showErrorMessage('La ventana se cerró inesperadamente.', idSpan);
         }
         if (errorCode.includes('auth/cancelled-popup-request')) {
-          alert('La solicitud fue cancelada');
+          showErrorMessage('La solicitud fue cancelada', idSpan);
         }
       });
   });
@@ -135,24 +138,20 @@ export const Home = () => {
     const newPassword = resetPassword(email);
     newPassword
       .then(() => {
-        alert('Te enviamos un correo de restablecimiento de contraseña, revisa tu correo electrónico!');
+        showErrorMessage('Te enviamos un correo de restablecimiento de contraseña, revisa tu correo electrónico!', idSpan);
       })
       .catch((error) => {
         const errorCode = error.code;
         if (errorCode.includes('auth/missing-email')) {
-          alert('Introduce el correo electrónico con el que te registrarte.');
+          showErrorMessage('Introduce el correo electrónico con el que te registrarte.', idSpan);
         }
         if (errorCode.includes('auth/invalid-email')) {
-          alert('El correo electrónico es inválido, por favor ingresa un correo válido.');
+          showErrorMessage('El correo electrónico es inválido, por favor ingresa un correo válido.', idSpan);
         }
         if (errorCode.includes('auth/user-not-found')) {
-          alert('El correo no está registrado, por favor registrate para iniciar sesión.');
+          showErrorMessage('El correo no está registrado, por favor registrate para iniciar sesión.', idSpan);
         }
-        console.log(errorCode);
       });
-
-    console.log(email, newPassword);
   });
-
   return HomeDiv;
 };
