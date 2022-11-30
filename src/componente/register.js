@@ -1,10 +1,17 @@
 import { singup } from '../lib/auth.js';
+import { showErrorMessage } from './Alert.js';
 
 export const Register = () => {
   const registerDiv = document.createElement('section');
   registerDiv.classList.add('sectionRegister');
 
   registerDiv.innerHTML = `
+  <div class='message2'>
+  <span class="error-message" id="error-message"></span>
+  </div>
+  <div class='message2'>
+  <span class="message-welcome" id="message-welcome"></span>
+  </div>
   <article class = "plantilla">
    <div class= "images">
     <img class="logo" src="img/logo.png" alt="">
@@ -59,6 +66,8 @@ export const Register = () => {
   backHome.appendChild(parrafo3);
   registerDiv.appendChild(backHome);
 
+  const idSpan = registerDiv.querySelector('#error-message');
+  const welcome = registerDiv.querySelector('#message-welcome');
   const singupElemnt = registerDiv.querySelector('.buttonRegister');
   singupElemnt.addEventListener('click', () => {
     const email = registerDiv.querySelector('#email').value;
@@ -68,23 +77,25 @@ export const Register = () => {
     promise
       .then((userCredential) => {
         const user = userCredential.user;
-        alert('Bienvenido a Down Family ahora puedes iniciar sesión');
-        console.log(user);
+        if (user) {
+          showErrorMessage('Bienvenido a Down Family ahora puedes iniciar sesión.', welcome);
+          console.log(user);
+          idSpan.style.display = 'none';
+        }
       })
 
       .catch((error) => {
         const errorCode = error.code;
-        const errorMessage = error.message;
+        welcome.style.display = 'none';
         if (errorCode.includes('auth/email-already-in-use')) {
-          alert('Tu email ya se encuentra registrado');
+          showErrorMessage('Tu email ya se encuentra registrado.', idSpan);
         }
         if (errorCode.includes('auth/internal-error')) {
-          alert('Correo inválido')
+          showErrorMessage('Correo inválido.', idSpan);
         }
         if (errorCode.includes('auth/weak-password')) {
-          alert('La contraseña debe tener al menos 6 caracteres')
+          showErrorMessage('La contraseña debe tener al menos 6 caracteres.', idSpan);
         }
-        console.log(errorCode, errorMessage);
       });
   });
 
