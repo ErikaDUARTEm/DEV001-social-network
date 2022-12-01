@@ -192,12 +192,12 @@ a:hover{
 
         background-image: url(img/social.png);
         background-repeat:no-repeat;
-        background-size: 100%;  
+        background-size: cover;
+        height: 100vh;  
        
     }
     
     section {
-        margin: 15px 0 10px 700px;
         background-color: rgba(255, 255, 255, 0.783);
         display: flex;
         padding: 0;
@@ -254,6 +254,10 @@ a:hover{
     }
     .buttonRegister{
      margin-top:10px;
+    }
+    main {
+        flex-direction: row;
+        justify-content: flex-end;
     }
     
 }

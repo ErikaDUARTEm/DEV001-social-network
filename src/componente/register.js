@@ -1,4 +1,4 @@
-import { singup } from '../lib/auth.js';
+import { singup, userCollection } from '../lib/auth.js';
 import { showErrorMessage } from './Alert.js';
 
 export const Register = () => {
@@ -40,7 +40,7 @@ export const Register = () => {
       eyes1.nextElementSibling.type = 'text';
       icon.classList.remove('fa-eye-slash');
       icon.classList.add('fa-eye');
-    }else {
+    } else {
       eyes1.nextElementSibling.type = 'password';
       icon.classList.remove('fa-eye');
       icon.classList.add('fa-eye-slash');
@@ -72,17 +72,17 @@ export const Register = () => {
   singupElemnt.addEventListener('click', () => {
     const email = registerDiv.querySelector('#email').value;
     const password = registerDiv.querySelector('#password').value;
-    const promise = singup(email, password);
+    const fullName = registerDiv.querySelector('#name').value;
+    const userName = registerDiv.querySelector('#userName').value;
 
-    promise
-      .then((userCredential) => {
-        const user = userCredential.user;
-        if (user) {
-          showErrorMessage('Bienvenido a Down Family ahora puedes iniciar sesión.', welcome);
-          console.log(user);
-          idSpan.style.display = 'none';
-        }
-      })
+    singup(email, password).then((userCredential) => {
+      const user = userCredential.user;
+      if (user) {
+        idSpan.style.display = 'none';
+        userCollection(email, fullName, userName, password);
+        showErrorMessage('Bienvenido a Down Family ahora puedes iniciar sesión.', welcome);
+      }
+    })
 
       .catch((error) => {
         const errorCode = error.code;
