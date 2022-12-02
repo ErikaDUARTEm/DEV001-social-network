@@ -18,7 +18,7 @@ export const Register = () => {
     <p class= "mensaje">Únete a nuestra comunidad y construye amistades que ven desde el corazón.</p>
    </div>
    
-   <div>
+   <div class = 'inputRegister'>
     <form class= "formRegister">
     <input type = "text" id = "email" class= "form-register" placeholder = "Correo Electrónico"><br>
     <input type = "text" id= "name" class= "form-register" placeholder = "Nombre completo"><br>

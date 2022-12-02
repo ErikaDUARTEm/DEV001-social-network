@@ -8,6 +8,7 @@ body {
     width: 100vw;
     height: auto;
 }
+
 main {
     display: flex;
     flex-direction: column;
@@ -28,7 +29,7 @@ section {
     margin: 20px 20px 20px 20px;
     padding: 0;
     border: 1px solid #1B6FB6;
- 
+
 }
 
 .plantilla {
@@ -106,24 +107,25 @@ img.girl {
 }
 
 button {
-    width: 40vw;
-    margin-top: 30px;
+    width: 50vw;
+    margin-top: 20px;
     height: 40px;
-    font-size: 15px;
+    font-size: 20px;
     font-family: 'Fira Sans Condensed', sans-serif;
     border-radius: 30px;
     background: #1B6FB6;
     color: white;
-    }
+}
+
 button:active {
     transform: scale(.9);
-    background-color:#558ab5 ;
+    background-color: #558ab5;
     transition: 0.2s ease all;
-   
+
 }
 
 .mensaje {
-    font-size: 17px;
+    font-size: 20px;
     font-family: 'Fira Sans Condensed', sans-serif;
     padding: 20px 10px 0 10px;
     margin: 0;
@@ -137,43 +139,48 @@ button:active {
     margin-top: 20px;
     padding: 3px 3px;
 }
+
 .enlaces img {
     width: 25px;
     right: 230px;
-    position:absolute;
+    position: absolute;
     top: 50%;
     transform: translateY(-50%);
 }
 
 a {
-  color:#1B6FB6;
-  text-decoration: none;
+    color: #1B6FB6;
+    text-decoration: none;
 }
-a:hover{
-  color: black;
+
+a:hover {
+    color: black;
 }
 
 .enlaces1 {
-    font-size: 17px;
+    font-size: 20px;
     font-family: 'Fira Sans Condensed', sans-serif;
     padding: 10px 10px;
 }
-.message{
+
+.message {
     justify-content: center;
     align-items: center;
     width: 100%;
 }
+
 .error-message {
     display: none;
     color: red;
     background-color: rgb(253, 189, 189);
     border: 1px solid red;
-    margin:0;
+    margin: 0;
     padding: 20px 20px;
     text-align: center;
     font-size: 20px;
     font-family: 'Fira Sans Condensed', sans-serif;
 }
+
 .message-welcome {
     margin: 2px 2px 2px 2px;
     color: green;
@@ -186,78 +193,187 @@ a:hover{
     font-family: 'Fira Sans Condensed', sans-serif;
 }
 
+.enlacesContenedor {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media screen and (min-width:768px) {
+    section {
+        height: 100vh;
+    }
+
+    .inputHome {
+        width: 80%;
+
+    }
+
+    .user {
+        width: 100%;
+        height: 40px;
+        font-size: 25px;
+    }
+
+    button {
+        width: 30%;
+        height: 50px;
+        font-size: 30px;
+    }
+
+
+    .enlaces {
+        font-size: 30px;
+        position: relative;
+    }
+
+    .enlaces img {
+        right: 340px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .inputRegister {
+        width: 80%;
+
+    }
+
+    .form-register {
+        width: 100%;
+        height: 40px;
+        font-size: 25px;
+
+    }
+
+    .sectionRegister {
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    .mensaje {
+        font-size: 30px;
+    }
+
+    .enlaces1 {
+        font-size: 30px;
+    }
+}
+
 @media screen and (min-width:1024px) {
 
     body {
 
         background-image: url(img/social.png);
-        background-repeat:no-repeat;
+        background-repeat: no-repeat;
         background-size: cover;
-        height: 100vh;  
-       
+        height: 100vh;
     }
-    
+
     section {
         background-color: rgba(255, 255, 255, 0.783);
         display: flex;
         padding: 0;
         border-radius: 10px;
         box-shadow: 0 0 20px 5px #1B6FB6;
+        height: 80vh;
     }
+    .enlacesContenedor {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
 
     .sectionHome {
         margin-top: 15px;
         padding: 10px 0 20px 0;
-        width: 30%;
-       
+        width: 500px;
+        justify-content: space-evenly;
     }
+
     .images {
         margin: 20px 20px 0 20px;
     }
-    .images p.mensaje{
-        margin: 0 0 15px 0;
+
+    .images p.mensaje {
+        margin: 2px 0 15px 0;
         padding: 0;
+        font-size:25px ;
     }
-    img.logo{
+    .mensaje{
+    font-size: 25px;
+    }
+   
+     img.logo {
         margin-top: 0;
     }
+
+    .inputHome {
+        width: 80%;
+
+    }
+
     .user {
-        width: 280px;
-        height: 30px;
-    }
-    button {
-        width: 150px;
+        width: 100%;
         height: 40px;
+        font-size: 20px;
     }
-    .enlaces{
+
+    button {
+        width: 250px;
+        height: 40px;
+        font-size:25px;
+    }
+
+    .enlaces {
         margin-top: 10px;
         padding: 0;
+        font-size: 25px;
     }
+
     .enlaces img {
-        right: 220px;
+        right: 280px;
     }
-    .enlaces1{
+
+    .enlaces1 {
         padding: 5px 5px;
+        font-size: 25px;
     }
+
     p.border {
         margin: 10px;
     }
+
     .sectionRegister {
         margin-top: 15px;
         padding: 10px 0 20px 0;
-        width: 30%;
-   
+        width: 500px;
+        display: flex;
+        justify-content: space-around;
     }
+
+    .inputRegister {
+        width: 80%;
+    }
+
     .form-register {
-       width: 280px;
-       height: 30px;
+        width: 100%;
+        height: 40px;
+        font-size: 20px;
     }
-    .buttonRegister{
-     margin-top:10px;
+
+    .buttonRegister {
+        margin-top: 10px;
     }
+
     main {
         flex-direction: row;
         justify-content: flex-end;
+        align-self: center;
     }
-    
+   
 }
