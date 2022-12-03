@@ -4,8 +4,7 @@ import { Muro } from './muro.js';
 
 export const Router = () => {
   const divRoot = document.getElementById('root');
-  console.log(divRoot);
-  const hash = location.hash;
+  const hash = window.location.hash;
   divRoot.innerHTML = null;
   if (!hash || hash === '#') {
     divRoot.appendChild(Home());

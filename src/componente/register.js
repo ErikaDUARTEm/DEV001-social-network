@@ -1,4 +1,4 @@
-import { singup, userCollection } from '../lib/auth.js';
+import { singup, userCollection } from '../lib/autentication.js';
 import { showErrorMessage } from './Alert.js';
 
 export const Register = () => {
