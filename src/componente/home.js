@@ -1,5 +1,5 @@
-import { signIn, signInGoogle, resetPassword } from '../lib/auth.js';
-import {showErrorMessage } from './Alert.js';
+import { signIn, signInGoogle, resetPassword } from '../lib/autentication.js';
+import { showErrorMessage } from './Alert.js';
 
 export const Home = () => {
   const HomeDiv = document.createElement('section');
@@ -44,10 +44,9 @@ export const Home = () => {
   buttonLogin.id = 'btn-login';
   buttonLogin.textContent = 'Iniciar sesión';
   HomeDiv.appendChild(buttonLogin);
-  
+
   const contenedorEnlace = document.createElement('div');
   contenedorEnlace.classList.add('enlacesContenedor');
-  
   const google = document.createElement('div');
   google.classList.add('enlaces');
   const imgGoogle = document.createElement('img');
@@ -61,14 +60,14 @@ export const Home = () => {
 
   google.appendChild(imgGoogle);
   google.appendChild(linkGoogle);
-  //HomeDiv.appendChild(google);
+  // HomeDiv.appendChild(google);
 
   const linkPassword = document.createElement('a');
   linkPassword.classList.add('enlaces');
   linkPassword.classList.add('resetPassword');
   linkPassword.setAttribute('href', '');
   linkPassword.textContent = '¿Olvidaste tu contraseña?';
-  //HomeDiv.appendChild(linkPassword);
+  // HomeDiv.appendChild(linkPassword);
   contenedorEnlace.appendChild(linkPassword);
 
   const register = document.createElement('div');
@@ -81,11 +80,11 @@ export const Home = () => {
   const linkRegister = document.createElement('a');
   linkRegister.setAttribute('href', '#Register');
   linkRegister.textContent = 'Registrate';
-  
+
   parrafo2.appendChild(linkRegister);
   register.appendChild(parrafo2);
   contenedorEnlace.appendChild(register);
-  //HomeDiv.appendChild(register);
+  // HomeDiv.appendChild(register);
   HomeDiv.appendChild(contenedorEnlace);
   const idSpan = HomeDiv.querySelector('#error-message');
 
@@ -99,7 +98,6 @@ export const Home = () => {
         const user = userCredential.user;
         if (user) {
           window.location.hash = '#Muro';
-          console.log(user);
         }
       })
       .catch((error) => {
