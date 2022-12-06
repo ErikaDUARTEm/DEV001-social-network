@@ -91,15 +91,13 @@ export const Home = () => {
   buttonLogin.addEventListener('click', () => {
     const email = HomeDiv.querySelector('#email').value;
     const password = HomeDiv.querySelector('#password').value;
-    const signIn2 = signIn(email, password);
 
-    signIn2
-      .then((userCredential) => {
-        const user = userCredential.user;
-        if (user) {
-          window.location.hash = '#Muro';
-        }
-      })
+    signIn(email, password).then((userCredential) => {
+      const user = userCredential.user;
+      if (user) {
+        window.location.hash = '#Muro';
+      }
+    })
       .catch((error) => {
         const errorCode = error.code;
         if (errorCode.includes('auth/user-not-found')) {
@@ -119,11 +117,9 @@ export const Home = () => {
   const signInWithGoogle = HomeDiv.querySelector('.linkGoogle');
   signInWithGoogle.addEventListener('click', (e) => {
     e.preventDefault();
-    const promiseGoogle = signInGoogle();
-    promiseGoogle
-      .then(() => {
-        window.location.hash = '#Muro';
-      })
+    signInGoogle().then(() => {
+      window.location.hash = '#Muro';
+    })
       .catch((error) => {
         const errorCode = error.code;
         if (errorCode.includes('auth/popup-closed-by-user')) {
@@ -139,11 +135,9 @@ export const Home = () => {
   reset.addEventListener('click', (e) => {
     e.preventDefault();
     const email = HomeDiv.querySelector('.emailPassword').value;
-    const newPassword = resetPassword(email);
-    newPassword
-      .then(() => {
-        showErrorMessage('Te enviamos un correo de restablecimiento de contraseña, revisa tu correo electrónico!', idSpan);
-      })
+    resetPassword(email).then(() => {
+      showErrorMessage('Te enviamos un correo de restablecimiento de contraseña, revisa tu correo electrónico!', idSpan);
+    })
       .catch((error) => {
         const errorCode = error.code;
         if (errorCode.includes('auth/missing-email')) {
