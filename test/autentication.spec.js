@@ -65,10 +65,9 @@ describe('signInGoogle', () => {
 
   it('debería poder ingresar con Google', () => {
     const provider = new GoogleAuthProvider();
-    signInGoogle(getAuth(), provider)
-      .then(() => {
-        expect(signInWithPopup).toHaveBeenCalledWith(getAuth(), provider);
-      });
+    signInGoogle(getAuth(), provider).then(() => {
+      expect(signInWithPopup).toHaveBeenCalledWith(getAuth(), provider);
+    });
   });
 });
 describe('resetPassword', () => {
@@ -82,8 +81,8 @@ describe('resetPassword', () => {
   });
 
   it('debería recuperar contraseña', () => {
-    resetPassword('danicagarcia@gmail.com').then((user) => {
-      expect(user).toBe('danicagarcia@gmail.com');
+    resetPassword('danicagarcia@gmail.com').then((email) => {
+      expect(email).toBe('danicagarcia@gmail.com');
     });
   });
 });
