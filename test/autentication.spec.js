@@ -2,14 +2,16 @@ import {
   createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword,
   signInWithPopup, GoogleAuthProvider, sendPasswordResetEmail,
 } from 'firebase/auth';
+import { addDoc, collection } from 'firebase/firestore';
 import {
-  singup, signIn, signInGoogle, resetPassword,
+  singup, signIn, signInGoogle, resetPassword, userCollection,
 } from '../src/lib/autentication.js';
 
 jest.mock('firebase/auth');
+jest.mock('firebase/firestore');
 
 describe('singup', () => {
-  it('debería ser una función', () => {
+  it('Debería ser una función', () => {
     expect(typeof singup).toBe('function');
   });
 
@@ -20,7 +22,7 @@ describe('singup', () => {
     expect(createUserWithEmailAndPassword).toBeCalled();
   });
 
-  it('deberia retornar un objeto con la propiedad email', () => {
+  it('Deberia retornar un objeto con la propiedad email', () => {
     singup('danicagarcia@gmail.com', '1234567').then((user) => {
       expect(user).toBe('danicagarcia@gmail.com');
     });
@@ -32,7 +34,7 @@ describe('singup', () => {
 });
 
 describe('signIn', () => {
-  it('debería ser una función', () => {
+  it('Debería ser una función', () => {
     expect(typeof signIn).toBe('function');
   });
 
@@ -42,7 +44,7 @@ describe('signIn', () => {
 
     expect(signInWithEmailAndPassword).toBeCalled();
   });
-  it('deberia retornar un objeto con la propiedad email', () => {
+  it('Deberia retornar un objeto con la propiedad email', () => {
     signIn('danicagarcia@gmail.com', '1234567').then((user) => {
       expect(user).toBe('danicagarcia@gmail.com');
     });
@@ -53,7 +55,7 @@ describe('signIn', () => {
   });
 });
 describe('signInGoogle', () => {
-  it('debería ser una función', () => {
+  it('Debería ser una función', () => {
     expect(typeof signInGoogle).toBe('function');
   });
   it('Debe validar el usuario registrado desde google', () => {
@@ -63,7 +65,7 @@ describe('signInGoogle', () => {
     expect(signInWithPopup).toBeCalled();
   });
 
-  it('debería poder ingresar con Google', () => {
+  it('Debería poder ingresar con Google', () => {
     const provider = new GoogleAuthProvider();
     signInGoogle(getAuth(), provider).then(() => {
       expect(signInWithPopup).toHaveBeenCalledWith(getAuth(), provider);
@@ -71,7 +73,7 @@ describe('signInGoogle', () => {
   });
 });
 describe('resetPassword', () => {
-  it('debería ser una función', () => {
+  it('Debería ser una función', () => {
     expect(typeof resetPassword).toBe('function');
   });
   it('Debe validar el usuario registrado', () => {
@@ -80,9 +82,23 @@ describe('resetPassword', () => {
     expect(sendPasswordResetEmail).toBeCalled();
   });
 
-  it('debería recuperar contraseña', () => {
+  it('Debería recuperar contraseña', () => {
     resetPassword('danicagarcia@gmail.com').then((email) => {
       expect(email).toBe('danicagarcia@gmail.com');
     });
+  });
+});
+describe('userCollection', () => {
+  it('Debería ser una función', () => {
+    expect(typeof userCollection).toBe('function');
+  });
+  it('Debería llamar al metodo addDoc', () => {
+    addDoc.mockImplementation(() => Promise.resolve('resolve'));
+    userCollection(addDoc());
+    expect(addDoc).toBeCalled();
+  });
+  it('Debería retornar al metodo Collection', () => {
+    collection.mockImplementation(() => Promise.resolve('object'));
+    expect(collection).toHaveReturned();
   });
 });
