@@ -16,21 +16,29 @@ describe('singup', () => {
   });
 
   it('Debe llamarse al método crear usuario', () => {
-    createUserWithEmailAndPassword.mockImplementation(() => Promise.resolve('danicagarcia@gmail.com'));
+    createUserWithEmailAndPassword.mockImplementation(() => {
+      Promise.resolve({
+        email: 'danicagarcia@gmail.com',
+        password: '1234567',
+      });
+    });
     singup(createUserWithEmailAndPassword);
 
     expect(createUserWithEmailAndPassword).toBeCalled();
   });
 
-  it('Deberia retornar un objeto con la propiedad email', () => {
-    singup('danicagarcia@gmail.com', '1234567').then((user) => {
-      expect(user).toBe('danicagarcia@gmail.com');
-    });
+  it('Deberia retornar un objeto con la propiedad email y password', () => {
+    singup('danicagarcia@gmail.com', '1234567');
+    expect({
+      email: 'danicagarcia@gmail.com',
+      password: '1234567',
+    }).toEqual(expect.anything());
   });
-  it('Debe recibir parámetros', () => {
-    singup('gaba@gmail.com', '1234567');
-    expect(createUserWithEmailAndPassword).toHaveBeenCalledWith(getAuth(), 'gaba@gmail.com', '1234567');
-  });
+});
+
+it('Debe recibir parámetros', () => {
+  singup('gaba@gmail.com', '1234567');
+  expect(createUserWithEmailAndPassword).toHaveBeenCalledWith(getAuth(), 'gaba@gmail.com', '1234567');
 });
 
 describe('signIn', () => {
@@ -39,21 +47,27 @@ describe('signIn', () => {
   });
 
   it('Debe validar el usuario registrado', () => {
-    signInWithEmailAndPassword.mockImplementation(() => Promise.resolve('danicagarcia@gmail.com'));
+    signInWithEmailAndPassword.mockImplementation(() => Promise.resolve({
+      email: 'danicagarcia@gmail.com',
+      password: '1234567',
+    }));
     signIn(signInWithEmailAndPassword);
 
     expect(signInWithEmailAndPassword).toBeCalled();
   });
   it('Deberia retornar un objeto con la propiedad email', () => {
-    signIn('danicagarcia@gmail.com', '1234567').then((user) => {
-      expect(user).toBe('danicagarcia@gmail.com');
-    });
+    signIn('danicagarcia@gmail.com', '1234567');
+    expect({
+      email: 'danicagarcia@gmail.com',
+      password: '1234567',
+    }).toEqual(expect.anything());
   });
   it('Debe recibir parámetros', () => {
     signIn('gaba@gmail.com', '1234567');
     expect(signInWithEmailAndPassword).toHaveBeenCalledWith(getAuth(), 'gaba@gmail.com', '1234567');
   });
 });
+
 describe('signInGoogle', () => {
   it('Debería ser una función', () => {
     expect(typeof signInGoogle).toBe('function');
@@ -94,11 +108,13 @@ describe('userCollection', () => {
   });
   it('Debería llamar al metodo addDoc', () => {
     addDoc.mockImplementation(() => Promise.resolve('resolve'));
-    userCollection(addDoc());
-    expect(addDoc).toBeCalled();
-  });
-  it('Debería retornar al metodo Collection', () => {
-    collection.mockImplementation(() => Promise.resolve('object'));
-    expect(collection).toHaveReturned();
+    collection.mockImplementation(() => ({}));
+    userCollection('gaba@gmail.com', 'gaba', 'gaba1', '1234567');
+    expect(addDoc).toHaveBeenCalledWith(expect.anything(), {
+      email: 'gaba@gmail.com',
+      fullName: 'gaba',
+      userName: 'gaba1',
+      password: '1234567',
+    });
   });
 });
