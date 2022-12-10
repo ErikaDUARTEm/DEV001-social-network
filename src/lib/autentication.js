@@ -1,6 +1,6 @@
 import {
   createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup,
-  GoogleAuthProvider, sendPasswordResetEmail, getAuth,
+  GoogleAuthProvider, sendPasswordResetEmail, getAuth, onAuthStateChanged,
 } from 'firebase/auth';
 import { getFirestore, addDoc, collection } from 'firebase/firestore';
 import { app } from './firebase.js';
@@ -21,3 +21,4 @@ export const userCollection = (email, fullName, userName, password) => addDoc(
     email, fullName, userName, password,
   },
 );
+export const stateChanged = (user) => onAuthStateChanged(auth, (user)); 

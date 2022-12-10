@@ -1,4 +1,4 @@
-import { signIn, signInGoogle, resetPassword } from '../lib/autentication.js';
+import { signIn, signInGoogle, resetPassword, stateChanged } from '../lib/autentication.js';
 import { showErrorMessage } from './Alert.js';
 
 export const Home = () => {
@@ -9,10 +9,10 @@ export const Home = () => {
   <span class="error-message" id="error-message"></span>
   </div>
   <div class = "plantilla">
-   <div class= "images">
-    <img class="logo" src="img/logo.png" alt="">
-    <img class="girl" src="img/una.png" alt="">
-   </div>
+  <div class= "images">
+    <img class="logo" src="img/logo.png" alt="logo">
+    <img class="girl" src="img/una.png" alt="girl">
+  </div>
   <div class = "inputHome">
     <form class = "formHome">
     <input type = "text" class= "user emailPassword" id="email" placeholder = "Usuario o Correo Electrónico">
@@ -24,9 +24,9 @@ export const Home = () => {
     </div>
     </form>
   </div>
- 
+
   </div>
- `;
+`;
   const eyes = HomeDiv.querySelector('.icon-eyes');
   eyes.addEventListener('click', () => {
     const icon = HomeDiv.querySelector('i');
@@ -91,12 +91,19 @@ export const Home = () => {
   buttonLogin.addEventListener('click', () => {
     const email = HomeDiv.querySelector('#email').value;
     const password = HomeDiv.querySelector('#password').value;
-
+    const formHome = HomeDiv.querySelector('.formHome');
     signIn(email, password).then((userCredential) => {
       const user = userCredential.user;
-      if (user) {
-        window.location.hash = '#Muro';
-      }
+      stateChanged(() => {
+        if (user) {
+          const uid = user.uid;
+          console.log(uid);
+          window.location.hash = '#Muro';
+        } else {
+          // User is signed out
+          // ...
+        }
+      });
     })
       .catch((error) => {
         const errorCode = error.code;
@@ -112,6 +119,7 @@ export const Home = () => {
         if (errorCode.includes('auth/internal-error')) {
           showErrorMessage('Debes ingresar tu contraseña para iniciar sesión.', idSpan);
         }
+        formHome.reset();
       });
   });
   const signInWithGoogle = HomeDiv.querySelector('.linkGoogle');

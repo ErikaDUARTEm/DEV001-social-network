@@ -1,4 +1,4 @@
-import { singup, userCollection } from '../lib/autentication.js';
+import { resetPassword, singup, userCollection } from '../lib/autentication.js';
 import { showErrorMessage } from './Alert.js';
 
 export const Register = () => {
@@ -74,7 +74,7 @@ export const Register = () => {
     const password = registerDiv.querySelector('#password').value;
     const fullName = registerDiv.querySelector('#name').value;
     const userName = registerDiv.querySelector('#userName').value;
-
+    const formRegister = registerDiv.querySelector('.formRegister');
     singup(email, password).then((userCredential) => {
       const user = userCredential.user;
       if (user) {
@@ -82,6 +82,7 @@ export const Register = () => {
         userCollection(email, fullName, userName, password);
         showErrorMessage('Bienvenido a Down Family ahora puedes iniciar sesión.', welcome);
       }
+      formRegister.reset();
     })
 
       .catch((error) => {
@@ -96,6 +97,7 @@ export const Register = () => {
         if (errorCode.includes('auth/weak-password')) {
           showErrorMessage('La contraseña debe tener al menos 6 caracteres.', idSpan);
         }
+        formRegister.reset();
       });
   });
 
