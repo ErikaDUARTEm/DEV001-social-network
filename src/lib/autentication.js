@@ -2,7 +2,9 @@ import {
   createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup,
   GoogleAuthProvider, sendPasswordResetEmail, getAuth, onAuthStateChanged,
 } from 'firebase/auth';
-import { getFirestore, addDoc, collection } from 'firebase/firestore';
+import {
+  getFirestore, addDoc, collection, getDocs, onSnapshot,
+} from 'firebase/firestore';
 import { app } from './firebase.js';
 
 export const auth = getAuth(app);
@@ -21,4 +23,8 @@ export const userCollection = (email, fullName, userName, password) => addDoc(
     email, fullName, userName, password,
   },
 );
-export const stateChanged = (user) => onAuthStateChanged(auth, (user)); 
+export const stateChanged = (user) => onAuthStateChanged(auth, (user));
+
+export const post = (coment) => addDoc(collection(db, 'posts'), coment);
+
+export const listener = (callback) => onSnapshot(collection(db, 'posts'), callback);
