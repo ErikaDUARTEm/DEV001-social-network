@@ -1,18 +1,16 @@
+import { post, listener } from '../lib/autentication.js';
+
 export const Muro = () => {
   const muroDiv = document.createElement('section');
   muroDiv.classList.add('sectionMuro');
   muroDiv.innerHTML = `
-  <header>
+  <header class="encabezado">
   <nav>
     <img class="logoMuro" src="img/logo.png" alt="logo">
     <span class="material-symbols-outlined"><img src="img/menu_open.png" alt="menu" class="material-symbols-outlined"></span>
   </nav>
   </header>
   <section class="muro">
-    <textarea width:"200 heigth:"100"></textarea>
-    <textarea width:"200 heigth:"100"></textarea>
-    <textarea width:"200 heigth:"100"></textarea>
-    <textarea width:"200 heigth:"100"></textarea>
   </section>
   <section class='modal'></section>
   <footer>
@@ -42,7 +40,39 @@ export const Muro = () => {
       </form>
     </div>
     `;
+    const publish = muroDiv.querySelector('.publish');
+    publish.addEventListener('click', () => {
+      const coment = muroDiv.querySelector('.newPost').value;
+      const publication = {};
+      publication.fecha = Number(new Date());
+      publication.coment = coment;
+      post(publication).then();
+    });
+    const cerrarModal = muroDiv.querySelector('.cerrar');
+    cerrarModal.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
   });
-
+  listener((res) => {
+    const muro2 = muroDiv.querySelector('.muro');
+    let html = '';
+    const comentOrder = [];
+    res.forEach((doc) => {
+      const coment2 = doc.data();
+      comentOrder.push(coment2);
+      html += `
+      <div>
+      <div class= 'user-content'>
+      <span class= 'userActive'><img src='img/account_circle.png' alt='cuenta' class='account'></span>
+      <span class= 'userName'>NOMBRE</span>
+      </div> 
+       <p>${coment2.coment}</p>
+      </div>
+      `;
+      muro2.innerHTML = html;
+    });
+    comentOrder.sort((a, b) => b.fecha - a.fecha);
+    console.log(comentOrder);
+  });
   return muroDiv;
 };
