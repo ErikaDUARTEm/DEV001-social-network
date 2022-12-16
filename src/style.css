@@ -79,6 +79,9 @@ header {
     'GRAD' 0,
     'opsz' 48
 }
+span.hambur {
+    height: 35px;
+}
 .cerrar {
     width: 35px;
 }
@@ -91,7 +94,6 @@ header {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-   
 }
 footer{
     bottom: 0;
@@ -112,9 +114,53 @@ footer{
     margin: 0;
     flex-wrap: wrap;
     width: 100%;
-    min-height: 100vh ;
+    min-height: 100vh;
+    gap: 30px;
+    padding: 0 0 70px 0;
 }
 
+.container-comment {
+    background-color: #fbf6f6ee;
+    width: 90%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 4px 5px 20px rgb(120, 119, 119);
+    border-radius: 10px;
+    padding: 10px 0 0 0;
+}
+p{
+    margin: 0;
+}
+.comment-publish {
+    background-color: rgb(244 239 6 / 23%);
+    width: 80%;
+    height: auto;
+    border-radius: 20px;
+    padding: 10px;
+}
+.iconos {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+}
+img.like {
+    width: 35px;
+}
+img.editar {
+    width: 35px;
+}
+img.delete {
+    width: 35px;
+}
+.span{
+    display: flex;
+    width: 130px;
+    flex-direction: row;
+    justify-content: flex-end;
+}
 img.girl {
     width: 50%;
     height: auto;
@@ -286,6 +332,7 @@ a:hover {
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    width: 80%;
 }
 button.publish {
     width: 20vw;
@@ -307,8 +354,43 @@ button.publish {
     align-items: center;
     gap: 16px;
 }
-
-
+.hambur {
+    z-index: 10;
+    cursor: pointer;
+}
+.menu-navegacion {
+    position: fixed;
+    top: 3%;
+    right: 1%;
+    width: 30vw;
+    height: 30%;
+    background-color: #bfdbf4;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    transition: transform .3s ease-in-out;
+    transform: translate(110%);
+    box-shadow: 0 0 6px rgba(0,0,0, .5);
+}
+.menu-navegacion a {
+    color: black;
+    font-family: 'Fira Sans Condensed', sans-serif;
+}
+.cerrarSesion {
+    width: 100%;
+    
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+.cerrarSesion :hover {
+    background-color: white;
+}
+.spread {
+    transform: translate(0);
+}
 
 @media screen and (min-width:768px) {
     section {

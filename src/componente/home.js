@@ -84,7 +84,6 @@ export const Home = () => {
   parrafo2.appendChild(linkRegister);
   register.appendChild(parrafo2);
   contenedorEnlace.appendChild(register);
-  // HomeDiv.appendChild(register);
   HomeDiv.appendChild(contenedorEnlace);
   const idSpan = HomeDiv.querySelector('#error-message');
 
@@ -99,9 +98,6 @@ export const Home = () => {
           const uid = user.uid;
           console.log(uid);
           window.location.hash = '#Muro';
-        } else {
-          // User is signed out
-          // ...
         }
       });
     })
