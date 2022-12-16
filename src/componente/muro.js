@@ -1,4 +1,11 @@
-import { post, listener } from '../lib/autentication.js';
+import {
+  post,
+  listener,
+  signOut2,
+  stateChanged,
+  auth,
+  userCollection,
+} from '../lib/autentication.js';
 
 export const Muro = () => {
   const muroDiv = document.createElement('section');
@@ -7,8 +14,11 @@ export const Muro = () => {
   <header class="encabezado">
   <nav>
     <img class="logoMuro" src="img/logo.png" alt="logo">
-    <span class="material-symbols-outlined"><img src="img/menu_open.png" alt="menu" class="material-symbols-outlined"></span>
-  </nav>
+    <span class="hambur material-symbols-outlined"><img src="img/menu_open.png" alt="menu" class="hambur material-symbols-outlined"></span>
+    <nav class='menu-navegacion'>
+      <a class='cerrarSesion'><strong>Cerrar Sesión</strong></a>
+    </nav>
+    </nav>
   </header>
   <section class="muro">
   </section>
@@ -35,7 +45,7 @@ export const Muro = () => {
       <span class= 'userName'>NOMBRE</span>
       </div>
       <form class='comment'>
-      <textarea class='newPost' placeholder='Escribe un comentario...'></textarea>
+      <textarea required type='text' class='newPost' placeholder='Escribe un comentario...'></textarea>
       <button type='button' class='publish'>Publicar</button>
       </form>
     </div>
@@ -43,10 +53,15 @@ export const Muro = () => {
     const publish = muroDiv.querySelector('.publish');
     publish.addEventListener('click', () => {
       const coment = muroDiv.querySelector('.newPost').value;
-      const publication = {};
-      publication.fecha = Number(new Date());
-      publication.coment = coment;
-      post(publication).then();
+      if (coment === '' || coment === '  ') {
+        alert('Este campo es requerido');
+      } else {
+        const publication = {};
+        publication.fecha = Number(new Date());
+        publication.coment = coment;
+        post(publication).then();
+        modal.style.display = 'none';
+      }
     });
     const cerrarModal = muroDiv.querySelector('.cerrar');
     cerrarModal.addEventListener('click', () => {
@@ -60,19 +75,43 @@ export const Muro = () => {
     res.forEach((doc) => {
       const coment2 = doc.data();
       comentOrder.push(coment2);
+    });
+    comentOrder.sort((a, b) => b.fecha - a.fecha);
+    comentOrder.forEach((comentario) => {
       html += `
-      <div>
+      <div class='container-comment'>
       <div class= 'user-content'>
-      <span class= 'userActive'><img src='img/account_circle.png' alt='cuenta' class='account'></span>
-      <span class= 'userName'>NOMBRE</span>
+          <span class= 'userActive'><img src='img/account_circle.png' alt='cuenta' class='account'></span>
+          <span class= 'userName'>NOMBRE</span>
+          <span class="material-symbols-outlined span"><img src="img/edit.png" alt="editar" class="editar"></span>
       </div> 
-       <p>${coment2.coment}</p>
-      </div>
+          <div class= 'comment-publish'>
+            <p>${comentario.coment}</p>
+          </div>
+          <div class='iconos'>
+          <span class="material-symbols-outlined"><img src="img/like.png" alt="like" class="like"></span>
+          <span class="material-symbols-outlined"><img src="img/delete.png" alt="delete" class="delete"></span>
+          </div>
+        </div>
       `;
       muro2.innerHTML = html;
     });
-    comentOrder.sort((a, b) => b.fecha - a.fecha);
-    console.log(comentOrder);
+    const home = muroDiv.querySelector('.home');
+    home.addEventListener('click', () => {
+      window.scrollTo(0, 0);
+    });
+    const hambur = muroDiv.querySelector('.hambur');
+    const menuNavegacion = muroDiv.querySelector('.menu-navegacion');
+    hambur.addEventListener('click', () => {
+      menuNavegacion.classList.toggle('spread');
+    });
+  });
+  const out = muroDiv.querySelector('.cerrarSesion');
+  out.addEventListener('click', () => {
+    signOut2().then(() => {
+      window.location.hash = '#';
+      window.location.reload();
+    });
   });
   return muroDiv;
 };
