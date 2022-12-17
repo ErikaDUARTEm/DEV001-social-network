@@ -3,7 +3,7 @@ import {
   GoogleAuthProvider, sendPasswordResetEmail, getAuth, onAuthStateChanged, signOut,
 } from 'firebase/auth';
 import {
-  getFirestore, addDoc, collection, onSnapshot,
+  getFirestore, addDoc, collection, onSnapshot, getDoc, doc, updateDoc,
 } from 'firebase/firestore';
 import { app } from './firebase.js';
 
@@ -25,8 +25,14 @@ export const userCollection = (email, fullName, userName, password) => addDoc(
 );
 export const stateChanged = (user) => onAuthStateChanged(auth, (user));
 
-export const post = (coment) => addDoc(collection(db, 'posts'), coment);
-
 export const listener = (callback) => onSnapshot(collection(db, 'posts'), callback);
 
 export const signOut2 = () => signOut(auth);
+
+export const currentUserData = () => auth.currentUser;
+
+export const post = (coment, likes) => addDoc(collection(db, 'posts'), coment, likes);
+
+export const getPost = (id) => getDoc(doc(db, 'posts', id));
+
+export const update = (id, newDoc) => updateDoc(doc(db, 'posts', id), { newDoc });

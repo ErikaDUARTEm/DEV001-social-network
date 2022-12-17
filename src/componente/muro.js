@@ -1,4 +1,6 @@
-import { post, listener, signOut2 } from '../lib/autentication.js';
+import {
+  post, listener, signOut2, getPost, currentUserData, update,
+} from '../lib/autentication.js';
 
 export const Muro = () => {
   const muroDiv = document.createElement('section');
@@ -52,6 +54,7 @@ export const Muro = () => {
         const publication = {};
         publication.fecha = Number(new Date());
         publication.coment = coment;
+        publication.likes = [];
         post(publication).then();
         modal.style.display = 'none';
       }
@@ -71,6 +74,7 @@ export const Muro = () => {
     });
     comentOrder.sort((a, b) => b.fecha - a.fecha);
     comentOrder.forEach((comentario) => {
+      console.log(comentOrder);
       html += `
       <div class='container-comment'>
       <div class= 'user-content'>
@@ -82,30 +86,50 @@ export const Muro = () => {
             <p>${comentario.coment}</p>
           </div>
           <div class='iconos'>
+          <button class='buttonLike' data-id = "'.$liInv['CVE_PLANPTCINV']">
           <span class='icon'><img src='img/heart.png' alt='like' class='like'></span>
           <span class='count'>0</span>
+          </button>
           <span class='material-symbols-outlined'><img src='img/delete.png' alt='delete' class='delete'></span>
           </div>
         </div>
       `;
       muro2.innerHTML = html;
-      const like = muro2.querySelector('.like');
       let clickead = false;
-      like.addEventListener('click', () => {
-        const count = muro2.querySelector('.count');
-        const icon = muro2.querySelector('.icon');
-        if (!clickead) {
-          clickead = true;
-          icon.innerHTML = ` 
-        <img src='img/heart-relleno.png' class='like'>`;
-          count.textContent++;
-        } else if (clickead) {
-          console.log('no like');
-          clickead = false;
-          icon.innerHTML = ` 
-        <img src='img/heart.png' class='like'>`;
-          count.textContent--;
-        }
+      console.log(currentUserData());
+      const like = muro2.querySelectorAll('.buttonLike');
+      like.forEach((element) => {
+        element.addEventListener('click', (e) => {
+          const id = e.target.id;
+          console.log(id);
+          getPost(id)
+            .then((promise) => {
+              let likes = promise.data().likes;
+              if (likes.lenght === 0) {
+                likes.push(currentUserData().email);
+              } else if (!likes.includes(currentUserData().email)) {
+                likes.push(currentUserData().email);
+              } else {
+                likes = likes.filter((email) => !email.includes(currentUserData().email));
+                update(id, { likes });
+              }
+            });
+          const count = muro2.querySelector('.count');
+          let count2 = 0;
+          const icon = muro2.querySelector('.icon');
+          if (!clickead) {
+            clickead = true;
+            icon.innerHTML = ` 
+                    <img src='img/heart-relleno.png' class='like'>`;
+            count.textContent = count2++;
+          } else if (clickead) {
+            console.log('no like');
+            clickead = false;
+            icon.innerHTML = ` 
+                    <img src='img/heart.png' class='like'>`;
+            count.textContent = count2--;
+          }
+        });
       });
     });
     const home = muroDiv.querySelector('.home');

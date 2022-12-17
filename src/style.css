@@ -145,6 +145,7 @@ p{
     width: 80%;
     display: flex;
     justify-content: space-between;
+    padding: 10px;
 }
 img.like {
     width: 35px;
@@ -227,6 +228,16 @@ button:active {
     background-color: #558ab5;
     transition: 0.2s ease all;
 
+}
+.buttonLike {
+    width: 30%;
+    display: flex;
+    justify-content: space-around;
+    margin: 0;
+    align-items: center;
+    background: transparent;
+    border: none;
+    color: black;
 }
 
 .mensaje {
