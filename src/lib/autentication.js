@@ -3,7 +3,7 @@ import {
   GoogleAuthProvider, sendPasswordResetEmail, getAuth, onAuthStateChanged, signOut,
 } from 'firebase/auth';
 import {
-  getFirestore, addDoc, collection, onSnapshot, getDoc, doc, updateDoc,
+  getFirestore, addDoc, collection, onSnapshot, getDoc, doc, updateDoc, deleteDoc,
 } from 'firebase/firestore';
 import { app } from './firebase.js';
 
@@ -36,3 +36,5 @@ export const post = (coment, likes) => addDoc(collection(db, 'posts'), coment, l
 export const getPost = (id) => getDoc(doc(db, 'posts', id));
 
 export const update = (id, newDoc) => updateDoc(doc(db, 'posts', id), { newDoc });
+
+export const deletePost = (id) => deleteDoc(doc(db, 'posts', id));

@@ -1,5 +1,5 @@
 import {
-  post, listener, signOut2, getPost, currentUserData, update,
+  post, listener, signOut2, getPost, currentUserData, update, deletePost,
 } from '../lib/autentication.js';
 
 export const Muro = () => {
@@ -71,10 +71,11 @@ export const Muro = () => {
     res.forEach((doc) => {
       const coment2 = doc.data();
       comentOrder.push(coment2);
-    });
-    comentOrder.sort((a, b) => b.fecha - a.fecha);
-    comentOrder.forEach((comentario) => {
-      console.log(comentOrder);
+
+      // comentOrder.sort((a, b) => b.fecha - a.fecha);
+      // comentOrder.forEach((comentario) => {
+      //   console.log(comentOrder);
+
       html += `
       <div class='container-comment'>
       <div class= 'user-content'>
@@ -83,20 +84,34 @@ export const Muro = () => {
           <span class="material-symbols-outlined span"><img src="img/edit.png" alt="editar" class="editar"></span>
       </div> 
           <div class= 'comment-publish'>
-            <p>${comentario.coment}</p>
+            <p>${coment2.coment}</p>
           </div>
           <div class='iconos'>
-          <button class='buttonLike' data-id = "'.$liInv['CVE_PLANPTCINV']">
+          <button class='buttonLike' data-id = ${doc.id}>
           <span class='icon'><img src='img/heart.png' alt='like' class='like'></span>
           <span class='count'>0</span>
           </button>
+          <button class='btnDelete' data-id = ${doc.id}>
           <span class='material-symbols-outlined'><img src='img/delete.png' alt='delete' class='delete'></span>
+          </button>
           </div>
         </div>
       `;
       muro2.innerHTML = html;
+      // });
+      const btnDelete = muro2.querySelectorAll('.btnDelete');
+      btnDelete.forEach((btn) => {
+        btn.addEventListener('click', ({ target: { dataset } }) => {
+          deletePost(dataset.id).then(() => {
+            console.log('eliminada');
+          }).catch(() => {
+            console.log('error no se eliminó');
+          });
+        });
+      });
+
       let clickead = false;
-      console.log(currentUserData());
+      // console.log(currentUserData());
       const like = muro2.querySelectorAll('.buttonLike');
       like.forEach((element) => {
         element.addEventListener('click', (e) => {
