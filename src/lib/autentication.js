@@ -31,7 +31,7 @@ export const signOut2 = () => signOut(auth);
 
 export const currentUserData = () => auth.currentUser;
 
-export const post = (coment, likes) => addDoc(collection(db, 'posts'), coment, likes);
+export const post = (coment, likes, uid) => addDoc(collection(db, 'posts'), coment, likes, uid);
 
 export const getPost = (id) => getDoc(doc(db, 'posts', id));
 

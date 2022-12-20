@@ -158,7 +158,7 @@ img.delete {
 }
 .span{
     display: flex;
-    width: 130px;
+    width: 35px;
     flex-direction: row;
     justify-content: flex-end;
 }
@@ -239,6 +239,26 @@ button:active {
     border: none;
     color: black;
 }
+.btnDelete{
+    width: 30%;
+    display: flex;
+    justify-content: space-around;
+    margin: 0;
+    align-items: center;
+    background: transparent;
+    border: none;
+    
+}
+.btnEdit{
+    width: 30%;
+    display: flex;
+    justify-content: space-around;
+    margin: 0;
+    align-items: center;
+    background: transparent;
+    border: none;  
+}
+
 
 .mensaje {
     font-size: 20px;
@@ -402,6 +422,14 @@ button.publish {
 .spread {
     transform: translate(0);
 }
+.account{
+    border-radius: 50px;
+    width: 60px;
+}
+.userName{
+    text-align: center;
+}
+
 
 @media screen and (min-width:768px) {
     section {
