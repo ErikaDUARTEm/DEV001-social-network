@@ -97,6 +97,7 @@ export const Home = () => {
         if (user) {
           const uid = user.uid;
           console.log(uid);
+          if(uid)
           window.location.hash = '#Muro';
         }
       });

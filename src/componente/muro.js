@@ -55,8 +55,12 @@ export const Muro = () => {
         publication.fecha = Number(new Date());
         publication.coment = coment;
         publication.likes = [];
+        publication.uid = currentUserData().uid;
+        publication.photo = currentUserData().photoURL;
+        publication.name = currentUserData().displayName;
         post(publication).then();
         modal.style.display = 'none';
+        console.log(publication);
       }
     });
     const cerrarModal = muroDiv.querySelector('.cerrar');
@@ -70,6 +74,7 @@ export const Muro = () => {
     const comentOrder = [];
     res.forEach((doc) => {
       const coment2 = doc.data();
+      console.log(coment2, 'comentario');
       comentOrder.push(coment2);
 
       // comentOrder.sort((a, b) => b.fecha - a.fecha);
@@ -79,9 +84,10 @@ export const Muro = () => {
       html += `
       <div class='container-comment'>
       <div class= 'user-content'>
-          <span class= 'userActive'><img src='img/account_circle.png' alt='cuenta' class='account'></span>
-          <span class= 'userName'>NOMBRE</span>
-          <span class="material-symbols-outlined span"><img src="img/edit.png" alt="editar" class="editar"></span>
+      <span class= 'userActive'><img src='${coment2.photo}' alt='cuenta' class='account'></span>
+      <span class= 'userName'>${coment2.name} </span>
+          ${currentUserData().uid === coment2.uid ? `<button class = 'btnEdit' data-id =${doc.id}>
+          <span class="material-symbols-outlined span"><img src="img/edit.png" alt="editar" class="editar"></span></button>` : ''}
       </div> 
           <div class= 'comment-publish'>
             <p>${coment2.coment}</p>
@@ -91,35 +97,37 @@ export const Muro = () => {
           <span class='icon'><img src='img/heart.png' alt='like' class='like'></span>
           <span class='count'>0</span>
           </button>
-          <button class='btnDelete' data-id = ${doc.id}>
-          <span class='material-symbols-outlined'><img src='img/delete.png' alt='delete' class='delete'></span>
-          </button>
+          ${currentUserData().uid === coment2.uid ? `<button class='btnDelete' data-id = ${doc.id}>
+        <span class='material-symbols-outlined' ><img src='img/delete.png' alt='delete' class='delete'></span>
+         </button >` : ''}
           </div>
         </div>
-      `;
+      
+  `;
       muro2.innerHTML = html;
       // });
-      const btnDelete = muro2.querySelectorAll('.btnDelete');
-      btnDelete.forEach((btn) => {
-        btn.addEventListener('click', ({ target: { dataset } }) => {
+
+      const btnDelete = muro2.querySelector('.btnDelete');
+      if (btnDelete) {
+        btnDelete.addEventListener('click', ({ target: { dataset } }) => {
           deletePost(dataset.id).then(() => {
             console.log('eliminada');
           }).catch(() => {
             console.log('error no se eliminó');
           });
         });
-      });
-
+      }
       let clickead = false;
       // console.log(currentUserData());
       const like = muro2.querySelectorAll('.buttonLike');
       like.forEach((element) => {
-        element.addEventListener('click', (e) => {
-          const id = e.target.id;
+        element.addEventListener('click', () => {
+          const id = doc.id;
           console.log(id);
           getPost(id)
             .then((promise) => {
               let likes = promise.data().likes;
+              console.log(likes);
               if (likes.lenght === 0) {
                 likes.push(currentUserData().email);
               } else if (!likes.includes(currentUserData().email)) {
@@ -130,19 +138,19 @@ export const Muro = () => {
               }
             });
           const count = muro2.querySelector('.count');
-          let count2 = 0;
+
           const icon = muro2.querySelector('.icon');
           if (!clickead) {
             clickead = true;
-            icon.innerHTML = ` 
-                    <img src='img/heart-relleno.png' class='like'>`;
-            count.textContent = count2++;
+            icon.innerHTML = `
+  < img src = 'img/heart-relleno.png' class='like' > `;
+            count.textContent++;
           } else if (clickead) {
             console.log('no like');
             clickead = false;
-            icon.innerHTML = ` 
-                    <img src='img/heart.png' class='like'>`;
-            count.textContent = count2--;
+            icon.innerHTML = `
+    < img src = 'img/heart.png' class='like' > `;
+            count.textContent--;
           }
         });
       });
