@@ -361,9 +361,13 @@ a:hover {
 }
 .user-content {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     width: 80%;
+}
+.content {
+    display: flex;
+    align-items: center;
 }
 button.publish {
     width: 20vw;
