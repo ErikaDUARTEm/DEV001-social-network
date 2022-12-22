@@ -35,6 +35,6 @@ export const post = (coment, likes) => addDoc(collection(db, 'posts'), coment, l
 
 export const getPost = (id) => getDoc(doc(db, 'posts', id));
 
-export const update = (id, newDoc) => updateDoc(doc(db, 'posts', id), { newDoc });
+export const update = (id, newDoc) => updateDoc(doc(db, 'posts', id), newDoc);
 
 export const deletePost = (id) => deleteDoc(doc(db, 'posts', id));

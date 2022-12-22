@@ -18,13 +18,12 @@ export const Home = () => {
     <input type = "text" class= "user emailPassword" id="email" placeholder = "Usuario o Correo Electrónico">
     <div class = "userPassword">
     <span class = "icon-eyes">
-    <i class="fa-solid fa-eye-slash" ></i>
+    <i class="fa-solid fa-eye-slash"></i>
     </span>
     <input type = "password" class= "user" id="password"  placeholder = "Contraseña">
     </div>
     </form>
   </div>
-
   </div>
 `;
   const eyes = HomeDiv.querySelector('.icon-eyes');
@@ -60,14 +59,13 @@ export const Home = () => {
 
   google.appendChild(imgGoogle);
   google.appendChild(linkGoogle);
-  // HomeDiv.appendChild(google);
-
+ 
   const linkPassword = document.createElement('a');
   linkPassword.classList.add('enlaces');
   linkPassword.classList.add('resetPassword');
   linkPassword.setAttribute('href', '');
   linkPassword.textContent = '¿Olvidaste tu contraseña?';
-  // HomeDiv.appendChild(linkPassword);
+
   contenedorEnlace.appendChild(linkPassword);
 
   const register = document.createElement('div');
@@ -97,7 +95,7 @@ export const Home = () => {
         if (user) {
           const uid = user.uid;
           console.log(uid);
-          if(uid)
+          if (uid)
           window.location.hash = '#Muro';
         }
       });

@@ -259,7 +259,6 @@ button:active {
     border: none;  
 }
 
-
 .mensaje {
     font-size: 20px;
     font-family: 'Fira Sans Condensed', sans-serif;
@@ -433,7 +432,9 @@ button.publish {
 .userName{
     text-align: center;
 }
-
+.true {
+    color: red;
+}
 
 @media screen and (min-width:768px) {
     section {
