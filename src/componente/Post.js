@@ -47,6 +47,16 @@ export const Post = (muroDiv) => {
         </div>`;
       muro2.innerHTML = html;
       //});
+      const btnEdit = muro2.querySelectorAll('.btnEdit');
+      btnEdit.forEach((edit) => {
+        edit.addEventListener('click', () => {
+          const id = edit.dataset.id;
+          getPost(id).then((res) => {
+            console.log(res.data());
+            
+          });
+        });
+      });
       const btnDelete = muro2.querySelectorAll('.btnDelete');
       btnDelete.forEach((btn) => {
         btn.addEventListener('click', () => {

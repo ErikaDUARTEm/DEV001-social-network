@@ -15,8 +15,8 @@ export const modalComment = (muroDiv) => {
         alt='cuenta' class='account'></span>
         <span class= 'userName'>${currentUserData().displayName}</span>
         </div>
-        <form class='comment'>
-        <textarea required type='text' class='newPost' placeholder='Escribe un comentario...'>
+        <form class='comment' id='comment'>
+        <textarea required type='text' class='newPost' id='newPost' placeholder='Escribe un comentario...'>
         </textarea>
         <button type='button' class='publish'>Publicar</button>
         </form>
