@@ -47,18 +47,13 @@ export const Post = (muroDiv) => {
         </div>`;
       muro2.innerHTML = html;
       //});
-      // const formModal = muro2.querySelector('.comment');
-      // const textareaModal = .querySelector('#newPost');
-
-     export const btnEdit = muro2.querySelectorAll('.btnEdit');
+      const btnEdit = muro2.querySelectorAll('.btnEdit');
       btnEdit.forEach((edit) => {
         edit.addEventListener('click', () => {
           const id = edit.dataset.id;
-          console.log(id);
           getPost(id).then((res) => {
             console.log(res.data());
-            // textareaModal[formModal].value = docEdit.coment;
-            // console.log(textareaModal);
+            
           });
         });
       });
