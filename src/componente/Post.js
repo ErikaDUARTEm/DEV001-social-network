@@ -1,9 +1,10 @@
+import { Delete } from './Delete.js';
+import { like } from './like.js';
 import {
   listener,
   currentUserData,
   getPost,
   update,
-  deletePost,
 } from '../lib/autentication.js';
 
 export const Post = (muroDiv) => {
@@ -31,11 +32,11 @@ export const Post = (muroDiv) => {
         alt="editar" class="editar"></span></button>` : ''}
         </div> 
         <div class= 'comment-publish'>
-        <p>${coment2.coment}</p>
+        <p class= 'coment'>${coment2.coment}</p>
         </div>
         <div class='iconos'>
         <button class='buttonLike' data-id = ${doc.id}>
-        <span class='icon'><i class="fa-regular fa-heart like"></i>
+        <span class='icon'><i class="fa-regular fa-heart like ${coment2.likes.includes(currentUserData().email) ? 'true' : 'false'}"></i>
         </span>
         <span class='count'>${coment2.likes.length}</span>
         </button>
@@ -47,53 +48,42 @@ export const Post = (muroDiv) => {
         </div>`;
       muro2.innerHTML = html;
       //});
-      const btnEdit = muro2.querySelectorAll('.btnEdit');
-      btnEdit.forEach((edit) => {
-        edit.addEventListener('click', () => {
-          const id = edit.dataset.id;
-          getPost(id).then((res) => {
-            console.log(res.data());
-            
-          });
-        });
-      });
-      const btnDelete = muro2.querySelectorAll('.btnDelete');
-      btnDelete.forEach((btn) => {
-        btn.addEventListener('click', () => {
-          deletePost(btn.dataset.id)
-            .then(() => {
-              console.log('eliminada');
-            })
-            .catch(() => {
-              console.log('error no se eliminó');
-            });
-        });
-      });
-      const like = muro2.querySelectorAll('.buttonLike');
-      like.forEach((likes2) => {
-        likes2.addEventListener('click', (e) => {
-          const id = likes2.dataset.id;
-          e.target.style.color = 'red';
-          const corazon = muro2.querySelector('.fa-heart');
-          if (corazon.style.color === '') {
-            corazon.style.color = 'red';
-          }
-          getPost(id).then((promise) => {
-            let likes = promise.data().likes;
-            if (likes.lenght === 0) {
-              likes.push(currentUserData().email);
-            } else if (!likes.includes(currentUserData().email)) {
-              likes.push(currentUserData().email);
-            } else {
-              likes = likes.filter(
-                (email) => !email.includes(currentUserData().email)
-              );
-            }
-            update(id, { likes });
+    });
+    const btn = muro2.querySelectorAll('.btnEdit');
+    btn.forEach((edit) => {
+      edit.addEventListener('click', () => {
+        const id = edit.dataset.id;
+        getPost(id).then((promise) => {
+          const coment = promise.data().coment;
+          let htmlmodal = '';
+          htmlmodal = `
+          <div class='content-modal'>
+          <div class= 'user-content2'>
+          <span class= 'userActive'><img src='${currentUserData().photoURL}' 
+          alt='cuenta' class='account'></span>
+          <span class= 'userName'>${currentUserData().displayName}</span>
+          </div>
+          <form class='comment' id='comment'>
+          <textarea required type='text' class='newPost'>${coment}
+          </textarea>
+          <button type='button' class='publish'>Editar</button>
+          </form>
+          </div>
+          `;
+          muro2.innerHTML = htmlmodal;
+
+          const comentEdit = muro2.querySelector('.newPost');
+          const buttonEdit = muro2.querySelector('.publish');
+          buttonEdit.addEventListener('click', () => {
+            const newPost = {};
+            newPost.coment = comentEdit.value;
+            update(id, newPost);
           });
         });
       });
     });
+    Delete(muro2);
+    like(muro2);
+    return Post;
   });
-  return Post;
 };

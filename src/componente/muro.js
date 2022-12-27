@@ -24,10 +24,11 @@ export const Muro = () => {
   <nav class="footer">
     <span class="material-symbols-outlined"><img src="img/home.png" alt="home" class="home"></span>
     <span class="material-symbols-outlined"><img src="img/add_box.png" alt="agregar" class="add"></span>
-    <span class="material-symbols-outlined"><img src="img/account_circle.png" alt="cuenta" class="account"></span>
+    <span class="material-symbols-outlined"><img src="img/account_circle.png"  alt="cuenta" class="account"></span>
     </nav>
   </footer>
   `;
+ 
   const home = muroDiv.querySelector('.home');
   home.addEventListener('click', () => {
     window.scrollTo(0, 0);

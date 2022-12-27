@@ -56,7 +56,8 @@ img.logo {
 }
 nav {
     display: flex;
-    justify-content: space-between;
+    width: 100%;
+    justify-content: space-around;
     align-items: center;
 }
 header {
@@ -86,14 +87,13 @@ span.hambur {
     width: 35px;
 }
 
-.footer {
-    width: 80vw;
+footer {
+    width: 97%;
+    height: 40px;
     padding: 15px;
     background-color: white;
     box-shadow: 0 -4px 9px -2px gray;
     display: flex;
-    justify-content: space-evenly;
-    align-items: center;
 }
 footer{
     bottom: 0;
@@ -156,9 +156,9 @@ img.editar {
 img.delete {
     width: 35px;
 }
-.span{
+.span {
     display: flex;
-    width: 35px;
+    width: 48px;
     flex-direction: row;
     justify-content: flex-end;
 }
@@ -360,9 +360,9 @@ a:hover {
 }
 .user-content {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     width: 80%;
+    justify-content: space-between;
 }
 .content {
     display: flex;
@@ -425,22 +425,38 @@ button.publish {
 .spread {
     transform: translate(0);
 }
-.account{
+.account {
     border-radius: 50px;
-    width: 60px;
+    width: 50px;
 }
 .userName{
     text-align: center;
 }
 .true {
     color: red;
+    font-weight: bold;
 }
-
-@media screen and (min-width:768px) {
-    section {
-        height: 100vh;
+.user-content2 {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+@media screen and (min-width:900px) {
+    body {
+        width: 100vw;
+       
     }
-
+    section {
+       width: 100vw;
+    }
+    .sectionMuro {
+        width: 100vw;
+    }
+    .muro {
+        width: 100vw;
+        display: flex;
+        flex-direction: column; 
+    }
     .inputHome {
         width: 80%;
 
@@ -469,7 +485,11 @@ button.publish {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-    }
+        -webkit-transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+}
 
     .inputRegister {
         width: 80%;
@@ -495,25 +515,57 @@ button.publish {
     .enlaces1 {
         font-size: 30px;
     }
+    
 }
 
-@media screen and (min-width:1024px) {
+@media screen and (min-width: 1024px) {
 
     body {
-
         background-image: url(img/social.png);
-        background-repeat: no-repeat;
         background-size: cover;
-        height: 100vh;
+        background-repeat: no-repeat;
     }
-
+    header {
+        padding: 15px;
+        width: 100%;
+        height: 40px;
+    }
+    main {
+        display: flex;
+        width: 100vw;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+        flex-direction: initial;
+        align-content: flex-end;
+        justify-content: flex-end;
+    }
+    nav{
+        width: 100%;
+        height: 100%;
+    }
+    img.logoMuro{
+        width: 40%;
+        height: 100%;
+        size: 50px;
+        
+    }
+    footer {
+        display: none;
+    }
+    .sectionMuro{
+        width: 100%;
+        margin: 0;
+    }
+    .muro{
+        width: 60vw;
+    }
     section {
         background-color: rgba(255, 255, 255, 0.783);
         display: flex;
         padding: 0;
         border-radius: 10px;
         box-shadow: 0 0 20px 5px #1B6FB6;
-        height: 80vh;
     }
     .enlacesContenedor {
         display: flex;
@@ -523,7 +575,6 @@ button.publish {
         align-items: center;
     }
     
-
     .sectionHome {
         margin-top: 15px;
         padding: 10px 0 20px 0;
@@ -543,8 +594,8 @@ button.publish {
     .mensaje{
     font-size: 25px;
     }
-   
-     img.logo {
+
+    img.logo {
         margin-top: 0;
     }
 
@@ -605,11 +656,10 @@ button.publish {
     .buttonRegister {
         margin-top: 10px;
     }
-
-    main {
-        flex-direction: row;
-        justify-content: flex-end;
-        align-self: center;
+    .user-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
     }
-   
 }
