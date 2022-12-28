@@ -4,13 +4,14 @@ export const Delete = (muro2) => {
   const btnDelete = muro2.querySelectorAll('.btnDelete');
   btnDelete.forEach((btnD) => {
     btnD.addEventListener('click', () => {
-      deletePost(btnD.dataset.id)
-        .then(() => {
-          console.log('eliminada');
-        })
-        .catch(() => {
-          console.log('error no se eliminó');
-        });
+      const confirmar = confirm('¿Estas seguro de eliminar el comentario?');
+      if (confirmar === true) {
+        deletePost(btnD.dataset.id)
+          .then(() => {
+          })
+          .catch(() => {
+          });
+      }
     });
   });
 };

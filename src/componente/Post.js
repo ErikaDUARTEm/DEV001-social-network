@@ -15,9 +15,8 @@ export const Post = (muroDiv) => {
     res.forEach((doc) => {
       const coment2 = doc.data();
       comentOrder.push(coment2);
-      // comentOrder.sort((a, b) => b.fecha - a.fecha);
-      // comentOrder.forEach((comentario) => {
-      //   console.log(comentOrder);
+      const order = comentOrder.sort((a, b) => b.fecha - a.fecha);
+      console.log(order);
       html += `
         <div class='container-comment'>
         <div class= 'user-content'>
@@ -47,16 +46,14 @@ export const Post = (muroDiv) => {
         </div>
         </div>`;
       muro2.innerHTML = html;
-      //});
-    });
-    const btn = muro2.querySelectorAll('.btnEdit');
-    btn.forEach((edit) => {
-      edit.addEventListener('click', () => {
-        const id = edit.dataset.id;
-        getPost(id).then((promise) => {
-          const coment = promise.data().coment;
-          let htmlmodal = '';
-          htmlmodal = `
+      const btn = muro2.querySelectorAll('.btnEdit');
+      btn.forEach((edit) => {
+        edit.addEventListener('click', () => {
+          const id = edit.dataset.id;
+          getPost(id).then((promise) => {
+            const coment = promise.data().coment;
+            let htmlmodal = '';
+            htmlmodal = `
           <div class='content-modal'>
           <div class= 'user-content2'>
           <span class= 'userActive'><img src='${currentUserData().photoURL}' 
@@ -70,20 +67,21 @@ export const Post = (muroDiv) => {
           </form>
           </div>
           `;
-          muro2.innerHTML = htmlmodal;
+            muro2.innerHTML = htmlmodal;
 
-          const comentEdit = muro2.querySelector('.newPost');
-          const buttonEdit = muro2.querySelector('.publish');
-          buttonEdit.addEventListener('click', () => {
-            const newPost = {};
-            newPost.coment = comentEdit.value;
-            update(id, newPost);
+            const comentEdit = muro2.querySelector('.newPost');
+            const buttonEdit = muro2.querySelector('.publish');
+            buttonEdit.addEventListener('click', () => {
+              const newPost = {};
+              newPost.coment = comentEdit.value;
+              update(id, newPost);
+            });
           });
         });
       });
+      Delete(muro2);
+      like(muro2);
+      return Post;
     });
-    Delete(muro2);
-    like(muro2);
-    return Post;
   });
 };

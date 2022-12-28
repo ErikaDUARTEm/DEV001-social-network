@@ -3,7 +3,7 @@ import {
   GoogleAuthProvider, sendPasswordResetEmail, getAuth, onAuthStateChanged, signOut,
 } from 'firebase/auth';
 import {
-  getFirestore, addDoc, collection, onSnapshot, getDoc, doc, updateDoc, deleteDoc,
+  getFirestore, addDoc, collection, onSnapshot, getDoc, doc, updateDoc, deleteDoc, query, orderBy,
 } from 'firebase/firestore';
 import { app } from './firebase.js';
 

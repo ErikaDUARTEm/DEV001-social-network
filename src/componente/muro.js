@@ -15,6 +15,11 @@ export const Muro = () => {
     <nav class='menu-navegacion'>
       <a class='cerrarSesion'><strong>Cerrar Sesión</strong></a>
     </nav>
+    <span class='desktop'>
+      <a class='desktop'><img src="img/home.png" alt="home" class="home"><strong></strong></a>
+      <a class='desktop'><img src="img/postAdd.png" alt="agregar" class="add"><strong></strong></a>
+      <a class='cerrarSesion1'><strong>Cerrar Sesión</strong></a>
+    </span>
     </nav>
   </header>
   <section class="muro">
@@ -28,7 +33,6 @@ export const Muro = () => {
     </nav>
   </footer>
   `;
- 
   const home = muroDiv.querySelector('.home');
   home.addEventListener('click', () => {
     window.scrollTo(0, 0);
@@ -45,6 +49,14 @@ export const Muro = () => {
       window.location.reload();
     });
   });
+  const out1 = muroDiv.querySelector('.cerrarSesion1');
+  out1.addEventListener('click', () => {
+    signOut2().then(() => {
+      window.location.hash = '#';
+      window.location.reload();
+    });
+  });
+
   modalComment(muroDiv);
   Post(muroDiv);
   return muroDiv;
