@@ -25,27 +25,28 @@ export const modalComment = (muroDiv) => {
           </form>
           </div>
           `;
-      const publish = modalContainer.querySelector('.publish');
-      publish.addEventListener('click', () => {
-        const coment = muroDiv.querySelector('.newPost').value;
-        if (coment === '' || coment === '  ') {
-          alert('Este campo es requerido');
-        } else {
-          const publication = {};
-          publication.fecha = Number(new Date());
-          publication.coment = coment;
-          publication.likes = [];
-          publication.uid = currentUserData().uid;
-          publication.photo = currentUserData().photoURL;
-          publication.name = currentUserData().displayName;
-          post(publication).then();
-          modalContainer.style.display = 'none';
-        }
-      });
-      const cerrarModal = muroDiv.querySelector('.cerrar');
-      cerrarModal.addEventListener('click', () => {
+    const publish = modalContainer.querySelector('.publish');
+    publish.addEventListener('click', () => {
+      const coment = muroDiv.querySelector('.newPost').value;
+      if (coment === '' || coment === '  ') {
+        alert('Este campo es requerido');
+      } else {
+        const publication = {};
+        publication.fecha = Number(new Date());
+        publication.coment = coment;
+        publication.likes = [];
+        publication.uid = currentUserData().uid;
+        publication.photo = currentUserData().photoURL;
+        publication.name = currentUserData().displayName;
+        post(publication).then();
+        console.log(publication);
         modalContainer.style.display = 'none';
-      });
+      }
     });
-    return modalComment;
-  };
+    const cerrarModal = muroDiv.querySelector('.cerrar');
+    cerrarModal.addEventListener('click', () => {
+      modalContainer.style.display = 'none';
+    });
+  });
+  return modalComment;
+};
