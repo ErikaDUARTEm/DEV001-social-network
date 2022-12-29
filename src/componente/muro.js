@@ -16,12 +16,16 @@ export const Muro = () => {
       <a class='cerrarSesion'><strong>Cerrar Sesión</strong></a>
     </nav>
     <span class='desktop'>
-      <a class='desktop'><img src="img/home.png" alt="home" class="home"><strong></strong></a>
-      <a class='desktop'><img src="img/postAdd.png" alt="agregar" class="add"><strong></strong></a>
-      <a class='cerrarSesion1'><strong>Cerrar Sesión</strong></a>
+      <a class='desktop'><img src="img/home.png" alt="home" class="home"></a>
+      <a class='cerrarSesion'><strong>Cerrar Sesión</strong></a>
     </span>
     </nav>
   </header>
+  <section class="editarPost">
+    <div style="display:flex; flex-direction:row">
+    <div class="add publicarPost">¿Qué estás pensando?</div>
+    </div>
+  </section>
   <section class="muro">
   </section>
   <section class='modal'></section>
@@ -33,27 +37,25 @@ export const Muro = () => {
     </nav>
   </footer>
   `;
-  const home = muroDiv.querySelector('.home');
-  home.addEventListener('click', () => {
-    window.scrollTo(0, 0);
+  const home = muroDiv.querySelectorAll('.home');
+  home.forEach((element) => {
+    element.addEventListener('click', () => {
+      console.log('descot dnaica');
+      window.scrollTo(0, 0);
+    });
   });
   const hambur = muroDiv.querySelector('.hambur');
   const menuNavegacion = muroDiv.querySelector('.menu-navegacion');
   hambur.addEventListener('click', () => {
     menuNavegacion.classList.toggle('spread');
   });
-  const out = muroDiv.querySelector('.cerrarSesion');
-  out.addEventListener('click', () => {
-    signOut2().then(() => {
-      window.location.hash = '#';
-      window.location.reload();
-    });
-  });
-  const out1 = muroDiv.querySelector('.cerrarSesion1');
-  out1.addEventListener('click', () => {
-    signOut2().then(() => {
-      window.location.hash = '#';
-      window.location.reload();
+  const out = muroDiv.querySelectorAll('.cerrarSesion');
+  out.forEach((element) => {
+    element.addEventListener('click', () => {
+      signOut2().then(() => {
+        window.location.hash = '#';
+        window.location.reload();
+      });
     });
   });
 
