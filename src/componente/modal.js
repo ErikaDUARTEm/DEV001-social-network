@@ -1,7 +1,7 @@
 import {
   post,
   currentUserData,
-} from '../lib/autentication.js';
+} from '../lib/firebase.js';
 
 export const modalComment = (muroDiv) => {
   const addComment = muroDiv.querySelectorAll('.add');
@@ -30,6 +30,7 @@ export const modalComment = (muroDiv) => {
       publish.addEventListener('click', () => {
         const coment = muroDiv.querySelector('.newPost').value;
         if (coment === '' || coment === '  ') {
+          // eslint-disable-next-line no-alert
           alert('Este campo es requerido');
         } else {
           const publication = {};
@@ -40,7 +41,6 @@ export const modalComment = (muroDiv) => {
           publication.photo = currentUserData().photoURL;
           publication.name = currentUserData().displayName;
           post(publication).then();
-          console.log(publication);
           modalContainer.style.display = 'none';
         }
       });
