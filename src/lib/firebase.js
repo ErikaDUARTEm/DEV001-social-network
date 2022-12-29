@@ -1,26 +1,40 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from 'firebase/app';
-// import { getAnalytics } from 'firebase/analytics';
+import {
+  createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup,
+  GoogleAuthProvider, sendPasswordResetEmail, getAuth, onAuthStateChanged, signOut,
+} from 'firebase/auth';
+import {
+  getFirestore, addDoc, collection, onSnapshot, getDoc, doc, updateDoc, deleteDoc,
+} from 'firebase/firestore';
+import { app } from './dataFirebase.js';
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+export const auth = getAuth(app);
+const db = getFirestore();
+export const singup = (email, password) => createUserWithEmailAndPassword(auth, email, password);
+export const signIn = (email, password) => signInWithEmailAndPassword(auth, email, password);
+export const resetPassword = (email) => sendPasswordResetEmail(auth, email);
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: 'AIzaSyCu0kZBY-06qCeMkFzgLKJfZJTlQbAhFf8',
-  authDomain: 'down-family.firebaseapp.com',
-  projectId: 'down-family',
-  storageBucket: 'down-family.appspot.com',
-  messagingSenderId: '561302547408',
-  appId: '1:561302547408:web:1dad4ee30f4f05126ba7d5',
-  measurementId: 'G-M0BX5P0S9M',
+export const signInGoogle = () => {
+  const provider = new GoogleAuthProvider();
+  return signInWithPopup(auth, provider);
 };
+export const userCollection = (email, fullName, userName, password) => addDoc(
+  collection(db, 'users'),
+  {
+    email, fullName, userName, password,
+  },
+);
+export const stateChanged = (user) => onAuthStateChanged(auth, (user));
 
-// Initialize Firebase
-export const app = initializeApp(firebaseConfig);
-// const analytics = getAnalytics(app);
+export const listener = (callback) => onSnapshot(collection(db, 'posts'), callback);
 
-// console.log(analytics);
+export const signOut2 = () => signOut(auth);
 
-// aqui exportaras las funciones que necesites
+export const currentUserData = () => auth.currentUser;
+
+export const post = (coment, likes) => addDoc(collection(db, 'posts'), coment, likes);
+
+export const getPost = (id) => getDoc(doc(db, 'posts', id));
+
+export const update = (id, newDoc) => updateDoc(doc(db, 'posts', id), newDoc);
+
+export const deletePost = (id) => deleteDoc(doc(db, 'posts', id));

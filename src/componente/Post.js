@@ -5,7 +5,7 @@ import {
   currentUserData,
   getPost,
   update,
-} from '../lib/autentication.js';
+} from '../lib/firebase.js';
 
 export const Post = (muroDiv) => {
   listener((res) => {
@@ -15,8 +15,7 @@ export const Post = (muroDiv) => {
     res.forEach((doc) => {
       const coment2 = doc.data();
       comentOrder.push(coment2);
-      const order = comentOrder.sort((a, b) => b.fecha - a.fecha);
-      console.log(order);
+      // const order = comentOrder.sort((a, b) => b.fecha - a.fecha);
       html += `
         <div class='container-comment'>
         <div class= 'user-content'>

@@ -1,4 +1,4 @@
-import { resetPassword, singup, userCollection } from '../lib/autentication.js';
+import { singup, userCollection } from '../lib/firebase.js';
 import { showErrorMessage } from './Alert.js';
 
 export const Register = () => {

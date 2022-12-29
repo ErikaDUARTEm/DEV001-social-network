@@ -1,6 +1,6 @@
 import {
   signOut2,
-} from '../lib/autentication.js';
+} from '../lib/firebase.js';
 import { modalComment } from './modal.js';
 import { Post } from './Post.js';
 
@@ -40,7 +40,6 @@ export const Muro = () => {
   const home = muroDiv.querySelectorAll('.home');
   home.forEach((element) => {
     element.addEventListener('click', () => {
-      console.log('descot dnaica');
       window.scrollTo(0, 0);
     });
   });

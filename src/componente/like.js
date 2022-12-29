@@ -3,7 +3,7 @@ import
   getPost,
   update,
   currentUserData,
-} from '../lib/autentication.js';
+} from '../lib/firebase.js';
 
 export const like = (muro2) => {
   const buttonLike = muro2.querySelectorAll('.buttonLike');
@@ -18,7 +18,7 @@ export const like = (muro2) => {
           likes.push(currentUserData().email);
         } else {
           likes = likes.filter(
-            (email) => !email.includes(currentUserData().email)
+            (email) => !email.includes(currentUserData().email),
           );
         }
         update(id, { likes });

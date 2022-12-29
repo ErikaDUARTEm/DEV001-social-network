@@ -1,11 +1,11 @@
 import {
   createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword,
-  signInWithPopup, GoogleAuthProvider, sendPasswordResetEmail,
+  signInWithPopup, GoogleAuthProvider, sendPasswordResetEmail, onAuthStateChanged,
 } from 'firebase/auth';
 import { addDoc, collection } from 'firebase/firestore';
 import {
-  singup, signIn, signInGoogle, resetPassword, userCollection,
-} from '../src/lib/autentication.js';
+  singup, signIn, signInGoogle, resetPassword, userCollection, stateChanged,
+} from '../src/lib/firebase.js';
 
 jest.mock('firebase/auth');
 jest.mock('firebase/firestore');
@@ -116,5 +116,30 @@ describe('userCollection', () => {
       userName: 'gaba1',
       password: '1234567',
     });
+  });
+});
+
+describe('stateChanged', () => {
+  it('Debería ser una función', () => {
+    expect(typeof stateChanged).toBe('function');
+  });
+
+  it('Debe llamar al método onAuthStateChanged', () => {
+    onAuthStateChanged.mockImplementation(() => {
+      Promise.resolve({
+        uid: 'NpmibTu1HBTW4xcMfvGYfZCPz2G3',
+      });
+    });
+    stateChanged(onAuthStateChanged);
+
+    expect(onAuthStateChanged).toBeCalled();
+  });
+  it('Deberia Obtener el usuario que ha iniciado sesión actualmente', () => {
+    stateChanged({ user: { uid: 'NpmibTu1HBTW4xcMfvGYfZCPz2G3' } });
+    expect({ uid: 'NpmibTu1HBTW4xcMfvGYfZCPz2G3' }).toEqual(expect.anything());
+  });
+  it('Debe recibir 2 parámetros', () => {
+    stateChanged(getAuth(), { user: { uid: 'NpmibTu1HBTW4xcMfvGYfZCPz2G3' } });
+    expect(onAuthStateChanged).toHaveBeenCalledWith(getAuth(), { user: { uid: 'NpmibTu1HBTW4xcMfvGYfZCPz2G3' } });
   });
 });

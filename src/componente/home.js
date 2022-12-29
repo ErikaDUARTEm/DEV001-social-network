@@ -1,4 +1,9 @@
-import { signIn, signInGoogle, resetPassword, stateChanged } from '../lib/autentication.js';
+import {
+  signIn,
+  signInGoogle,
+  resetPassword,
+  stateChanged,
+} from '../lib/firebase.js';
 import { showErrorMessage } from './Alert.js';
 
 export const Home = () => {
@@ -59,7 +64,7 @@ export const Home = () => {
 
   google.appendChild(imgGoogle);
   google.appendChild(linkGoogle);
- 
+
   const linkPassword = document.createElement('a');
   linkPassword.classList.add('enlaces');
   linkPassword.classList.add('resetPassword');
@@ -89,30 +94,40 @@ export const Home = () => {
     const email = HomeDiv.querySelector('#email').value;
     const password = HomeDiv.querySelector('#password').value;
     const formHome = HomeDiv.querySelector('.formHome');
-    signIn(email, password).then((userCredential) => {
-      const user = userCredential.user;
-      stateChanged(() => {
-        if (user) {
-          const uid = user.uid;
-          console.log(uid);
-          if (uid)
-          window.location.hash = '#Muro';
-        }
-      });
-    })
+    signIn(email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        stateChanged(() => {
+          if (user) {
+            const uid = user.uid;
+            if (uid) {
+              window.location.hash = '#Muro';
+            }
+          }
+        });
+      })
       .catch((error) => {
         const errorCode = error.code;
         if (errorCode.includes('auth/user-not-found')) {
-          showErrorMessage('El correo electrónico que ingresaste no está conectado a una cuenta.', idSpan);
+          showErrorMessage(
+            'El correo electrónico que ingresaste no está conectado a una cuenta.',
+            idSpan,
+          );
         }
         if (errorCode.includes('auth/wrong-password')) {
           showErrorMessage('La contraseña que ingresaste es inválida.', idSpan);
         }
         if (errorCode.includes('auth/invalid-email')) {
-          showErrorMessage('Debes ingresar tu correo y contraseña para iniciar sesión o verifica que el correo electrónico es válido.', idSpan);
+          showErrorMessage(
+            'Debes ingresar tu correo y contraseña para iniciar sesión o verifica que el correo electrónico es válido.',
+            idSpan,
+          );
         }
         if (errorCode.includes('auth/internal-error')) {
-          showErrorMessage('Debes ingresar tu contraseña para iniciar sesión.', idSpan);
+          showErrorMessage(
+            'Debes ingresar tu contraseña para iniciar sesión.',
+            idSpan,
+          );
         }
         formHome.reset();
       });
@@ -120,9 +135,10 @@ export const Home = () => {
   const signInWithGoogle = HomeDiv.querySelector('.linkGoogle');
   signInWithGoogle.addEventListener('click', (e) => {
     e.preventDefault();
-    signInGoogle().then(() => {
-      window.location.hash = '#Muro';
-    })
+    signInGoogle()
+      .then(() => {
+        window.location.hash = '#Muro';
+      })
       .catch((error) => {
         const errorCode = error.code;
         if (errorCode.includes('auth/popup-closed-by-user')) {
@@ -138,19 +154,32 @@ export const Home = () => {
   reset.addEventListener('click', (e) => {
     e.preventDefault();
     const email = HomeDiv.querySelector('.emailPassword').value;
-    resetPassword(email).then(() => {
-      showErrorMessage('Te enviamos un correo de restablecimiento de contraseña, revisa tu correo electrónico!', idSpan);
-    })
+    resetPassword(email)
+      .then(() => {
+        showErrorMessage(
+          'Te enviamos un correo de restablecimiento de contraseña, revisa tu correo electrónico!',
+          idSpan,
+        );
+      })
       .catch((error) => {
         const errorCode = error.code;
         if (errorCode.includes('auth/missing-email')) {
-          showErrorMessage('Introduce el correo electrónico con el que te registrarte.', idSpan);
+          showErrorMessage(
+            'Introduce el correo electrónico con el que te registrarte.',
+            idSpan,
+          );
         }
         if (errorCode.includes('auth/invalid-email')) {
-          showErrorMessage('El correo electrónico es inválido, por favor ingresa un correo válido.', idSpan);
+          showErrorMessage(
+            'El correo electrónico es inválido, por favor ingresa un correo válido.',
+            idSpan,
+          );
         }
         if (errorCode.includes('auth/user-not-found')) {
-          showErrorMessage('El correo no está registrado, por favor registrate para iniciar sesión.', idSpan);
+          showErrorMessage(
+            'El correo no está registrado, por favor registrate para iniciar sesión.',
+            idSpan,
+          );
         }
       });
   });
