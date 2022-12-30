@@ -4,12 +4,12 @@ import {
 } from 'firebase/auth';
 import {
   addDoc, collection, onSnapshot,
-  getDoc, doc,
+  getDoc, doc, updateDoc, deleteDoc,
 } from 'firebase/firestore';
 import {
   singup, signIn, signInGoogle, resetPassword,
   userCollection, stateChanged, listener, post, signOut2,
-  getPost,
+  getPost, update, deletePost,
 } from '../src/lib/firebase.js';
 
 jest.mock('firebase/auth');
@@ -227,5 +227,47 @@ describe('getPost', () => {
   it('Debería devolver un objeto', () => {
     getPost({ id: 'HumtDZSAuGciUiaxvGs6' });
     expect(getDoc).toEqual(expect.anything(), { id: 'HumtDZSAuGciUiaxvGs6' });
+  });
+});
+describe('update', () => {
+  it('Debería ser una función', () => {
+    expect(typeof update).toBe('function');
+  });
+  it('Debería ser llamada con dos parametros', () => {
+    const id = 'HumtDZSAuGciUiaxvGs6';
+    const newDoc = {};
+    update(id, newDoc);
+    expect(updateDoc).toHaveBeenCalledWith(id, newDoc);
+  });
+  it('Debería llamar al metodo updateDoc', () => {
+    update(updateDoc);
+    expect(updateDoc).toBeCalled();
+  });
+  it('Debería devolver un nuevo objeto', () => {
+    updateDoc({
+      id: 'HumtDZSAuGciUiaxvGs6',
+      newDoc: {},
+    });
+    expect(updateDoc).toEqual(expect.anything(), { id: 'HumtDZSAuGciUiaxvGs6', newDoc: {} });
+  });
+});
+describe('deletePost', () => {
+  it('Debería ser una función', () => {
+    expect(typeof deletePost).toBe('function');
+  });
+  it('Debería ser llamada con un parametro', () => {
+    const id = 'HumtDZSAuGciUiaxvGs6';
+    deletePost(id);
+    expect(deleteDoc).toHaveBeenCalledWith(id);
+  });
+  it('Debería llamar al metodo updateDoc', () => {
+    deletePost(deleteDoc);
+    expect(deleteDoc).toBeCalled();
+  });
+  it('Debería eliminar un  objeto', () => {
+    deletePost({
+      id: 'HumtDZSAuGciUiaxvGs6',
+    });
+    expect(deleteDoc).toEqual(expect.anything(), { id: 'HumtDZSAuGciUiaxvGs6' });
   });
 });
