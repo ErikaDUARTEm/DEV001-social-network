@@ -1,5 +1,5 @@
 import {
-  signOut2,
+  signOut2, auth,
 } from '../lib/firebase.js';
 import { modalComment } from './modal.js';
 import { Post } from './Post.js';
@@ -21,10 +21,9 @@ export const Muro = () => {
     </span>
     </nav>
   </header>
-  <section class="editarPost">
-    <div style="display:flex; flex-direction:row">
+  <section class="editarPost"> 
+    <span class="material-symbols-outlined"><img src="${auth.currentUser.photoURL}"  alt="cuenta" class="account"></span>
     <div class="add publicarPost">¿Qué estás pensando?</div>
-    </div>
   </section>
   <section class="muro">
   </section>
@@ -33,7 +32,7 @@ export const Muro = () => {
   <nav class="footer">
     <span class="material-symbols-outlined"><img src="img/home.png" alt="home" class="home"></span>
     <span class="material-symbols-outlined"><img src="img/add_box.png" alt="agregar" class="add"></span>
-    <span class="material-symbols-outlined"><img src="img/account_circle.png"  alt="cuenta" class="account"></span>
+    <span class="material-symbols-outlined"><img src="${auth.currentUser.photoURL}"  alt="cuenta" class="account"></span>
     </nav>
   </footer>
   `;

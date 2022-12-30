@@ -2,7 +2,7 @@ import
 {
   getPost,
   update,
-  currentUserData,
+  auth,
 } from '../lib/firebase.js';
 
 export const like = (muro2) => {
@@ -13,12 +13,12 @@ export const like = (muro2) => {
       getPost(id).then((promise) => {
         let likes = promise.data().likes;
         if (likes.lenght === 0) {
-          likes.push(currentUserData().email);
-        } else if (!likes.includes(currentUserData().email)) {
-          likes.push(currentUserData().email);
+          likes.push(auth.currentUser.email);
+        } else if (!likes.includes(auth.currentUser.email)) {
+          likes.push(auth.currentUser.email);
         } else {
           likes = likes.filter(
-            (email) => !email.includes(currentUserData().email),
+            (email) => !email.includes(auth.currentUser.email),
           );
         }
         update(id, { likes });

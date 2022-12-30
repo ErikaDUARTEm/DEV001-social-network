@@ -1,10 +1,15 @@
 import {
   createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword,
-  signInWithPopup, GoogleAuthProvider, sendPasswordResetEmail, onAuthStateChanged,
+  signInWithPopup, GoogleAuthProvider, sendPasswordResetEmail, onAuthStateChanged, signOut,
 } from 'firebase/auth';
-import { addDoc, collection, onSnapshot } from 'firebase/firestore';
 import {
-  singup, signIn, signInGoogle, resetPassword, userCollection, stateChanged, listener, post,
+  addDoc, collection, onSnapshot,
+  getDoc, doc,
+} from 'firebase/firestore';
+import {
+  singup, signIn, signInGoogle, resetPassword,
+  userCollection, stateChanged, listener, post, signOut2,
+  getPost,
 } from '../src/lib/firebase.js';
 
 jest.mock('firebase/auth');
@@ -162,5 +167,65 @@ describe('listener', () => {
     const callback = () => {};
     listener(callback);
     expect(onSnapshot).toHaveBeenCalledWith(collection(), callback);
+  });
+});
+describe('signOut2', () => {
+  it('Debería ser una función', () => {
+    expect(typeof signOut2).toBe('function');
+  });
+
+  it('Debe llamar al método signOut', () => {
+    signOut.mockImplementation(() => {});
+    signOut2(signOut);
+    expect(signOut).toBeCalled();
+  });
+
+  it('Deberia recibir un parametro', () => {
+    signOut2(getAuth());
+    expect(signOut).toHaveBeenCalledWith(getAuth());
+  });
+});
+
+describe('post', () => {
+  it('Debería ser una función', () => {
+    expect(typeof post).toBe('function');
+  });
+
+  it('Debería llamar al metodo addDoc', () => {
+    post(addDoc);
+    expect(addDoc).toBeCalled();
+  });
+
+  it('Debería devolver un objeto', () => {
+    addDoc.mockImplementation(() => Promise.resolve('resolve'));
+    collection.mockImplementation(() => ({
+      coment: 'Hola',
+      likes: [],
+    }));
+    post('Hola', []);
+    expect(addDoc).toEqual(expect.anything(), {
+      coment: 'Hola',
+      likes: [],
+    });
+  });
+});
+describe('getPost', () => {
+  it('Debería ser una función', () => {
+    expect(typeof getPost).toBe('function');
+  });
+  it('Debería ser llamada con un parametro', () => {
+    getDoc.mockImplementation(() => Promise.resolve('resolve'));
+    doc.mockImplementation(() => ('HumtDZSAuGciUiaxvGs6'));
+    const id = 'HumtDZSAuGciUiaxvGs6';
+    getPost(id);
+    expect(getDoc).toHaveBeenCalledWith(id);
+  });
+  it('Debería llamar al metodo getDoc', () => {
+    getPost(getDoc);
+    expect(getDoc).toBeCalled();
+  });
+  it('Debería devolver un objeto', () => {
+    getPost({ id: 'HumtDZSAuGciUiaxvGs6' });
+    expect(getDoc).toEqual(expect.anything(), { id: 'HumtDZSAuGciUiaxvGs6' });
   });
 });

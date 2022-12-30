@@ -705,6 +705,8 @@ span.desktop {
     }
     .editarPost{
         display:flex;
+        flex-direction: row;
+        justify-content:space-evenly;
         width:50%;
         height: 30%;
         padding: 20px;
@@ -712,7 +714,7 @@ span.desktop {
     }
     
      .editarPost > div{
-        width: 50%;
+        width: 70%;
         justify-content: center;
         align-items: center;
         background-color: rgb(244 239 6 / 23%);

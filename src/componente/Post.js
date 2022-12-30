@@ -2,9 +2,9 @@ import { Delete } from './Delete.js';
 import { like } from './like.js';
 import {
   listener,
-  currentUserData,
   getPost,
   update,
+  auth,
 } from '../lib/firebase.js';
 
 export const Post = (muroDiv) => {
@@ -24,7 +24,7 @@ export const Post = (muroDiv) => {
         alt='cuenta' class='account'></span>
         <span class= 'userName'>${coment2.name} </span>
         </div>
-        ${currentUserData().uid === coment2.uid ? `<button class = 'btnEdit' 
+        ${auth.currentUser.uid === coment2.uid ? `<button class = 'btnEdit' 
         data-id =${doc.id}>
         <span class="material-symbols-outlined span"><img src="img/edit.png" 
         alt="editar" class="editar"></span></button>` : ''}
@@ -34,11 +34,11 @@ export const Post = (muroDiv) => {
         </div>
         <div class='iconos'>
         <button class='buttonLike' data-id = ${doc.id}>
-        <span class='icon'><i class="fa-regular fa-heart like ${coment2.likes.includes(currentUserData().email) ? 'true' : 'false'}"></i>
+        <span class='icon'><i class="fa-regular fa-heart like ${coment2.likes.includes(auth.currentUser.email) ? 'true' : 'false'}"></i>
         </span>
         <span class='count'>${coment2.likes.length}</span>
         </button>
-        ${currentUserData().uid === coment2.uid ? `<button class='btnDelete'
+        ${auth.currentUser.uid === coment2.uid ? `<button class='btnDelete'
         data-id = ${doc.id}>
         <span class='material-symbols-outlined'><img src='img/delete.png' 
         alt='delete'class='delete'></span></button>` : ''}
@@ -55,9 +55,9 @@ export const Post = (muroDiv) => {
             htmlmodal = `
           <div class='content-modal'>
           <div class= 'user-content2'>
-          <span class= 'userActive'><img src='${currentUserData().photoURL}' 
+          <span class= 'userActive'><img src='${auth.currentUser.photoURL}' 
           alt='cuenta' class='account'></span>
-          <span class= 'userName'>${currentUserData().displayName}</span>
+          <span class= 'userName'>${auth.currentUser.displayName}</span>
           </div>
           <form class='comment' id='comment'>
           <textarea required type='text' class='newPost'>${coment}
