@@ -2,9 +2,9 @@ import {
   createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword,
   signInWithPopup, GoogleAuthProvider, sendPasswordResetEmail, onAuthStateChanged,
 } from 'firebase/auth';
-import { addDoc, collection } from 'firebase/firestore';
+import { addDoc, collection, onSnapshot } from 'firebase/firestore';
 import {
-  singup, signIn, signInGoogle, resetPassword, userCollection, stateChanged,
+  singup, signIn, signInGoogle, resetPassword, userCollection, stateChanged, listener, post,
 } from '../src/lib/firebase.js';
 
 jest.mock('firebase/auth');
@@ -134,12 +134,33 @@ describe('stateChanged', () => {
 
     expect(onAuthStateChanged).toBeCalled();
   });
-  it('Deberia Obtener el usuario que ha iniciado sesión actualmente', () => {
+  it('Deberia observar el usuario que ha iniciado sesión actualmente', () => {
     stateChanged({ user: { uid: 'NpmibTu1HBTW4xcMfvGYfZCPz2G3' } });
     expect({ uid: 'NpmibTu1HBTW4xcMfvGYfZCPz2G3' }).toEqual(expect.anything());
   });
   it('Debe recibir 2 parámetros', () => {
     stateChanged(getAuth(), { user: { uid: 'NpmibTu1HBTW4xcMfvGYfZCPz2G3' } });
     expect(onAuthStateChanged).toHaveBeenCalledWith(getAuth(), { user: { uid: 'NpmibTu1HBTW4xcMfvGYfZCPz2G3' } });
+  });
+});
+describe('listener', () => {
+  it('Debería ser una función', () => {
+    expect(typeof listener).toBe('function');
+  });
+
+  it('Debe llamar al método onSnapshot ', () => {
+    onSnapshot.mockImplementation(() => ({}));
+    listener(onSnapshot);
+
+    expect(onSnapshot).toBeCalled();
+  });
+  it('Deberia escuchar el post publicado', () => {
+    listener(post);
+    expect({ post }).toEqual(expect.anything());
+  });
+  it('Debe recibir  parámetros', () => {
+    const callback = () => {};
+    listener(callback);
+    expect(onSnapshot).toHaveBeenCalledWith(collection(), callback);
   });
 });
