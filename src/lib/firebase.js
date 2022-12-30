@@ -29,8 +29,6 @@ export const listener = (callback) => onSnapshot(collection(db, 'posts'), callba
 
 export const signOut2 = () => signOut(auth);
 
-export const currentUserData = () => auth.currentUser;
-
 export const post = (coment, likes) => addDoc(collection(db, 'posts'), coment, likes);
 
 export const getPost = (id) => getDoc(doc(db, 'posts', id));

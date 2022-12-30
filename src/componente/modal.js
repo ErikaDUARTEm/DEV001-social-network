@@ -1,6 +1,6 @@
 import {
   post,
-  currentUserData,
+  auth,
 } from '../lib/firebase.js';
 
 export const modalComment = (muroDiv) => {
@@ -15,9 +15,9 @@ export const modalComment = (muroDiv) => {
           <span class="material-symbols-outlined"><img src='img/cancel.png' class='cerrar'></span>
           </div>
           <div class= 'user-content'>
-          <span class= 'userActive'><img src='${currentUserData().photoURL}' 
+          <span class= 'userActive'><img src='${auth.currentUser.photoURL}' 
           alt='cuenta' class='account'></span>
-          <span class= 'userName'>${currentUserData().displayName}</span>
+          <span class= 'userName'>${auth.currentUser.displayName}</span>
           </div>
           <form class='comment' id='comment'>
           <textarea required type='text' class='newPost' placeholder='Escribe un comentario...'>
@@ -37,9 +37,9 @@ export const modalComment = (muroDiv) => {
           publication.fecha = Number(new Date());
           publication.coment = coment;
           publication.likes = [];
-          publication.uid = currentUserData().uid;
-          publication.photo = currentUserData().photoURL;
-          publication.name = currentUserData().displayName;
+          publication.uid = auth.currentUser.uid;
+          publication.photo = auth.currentUser.photoURL;
+          publication.name = auth.currentUser.displayName;
           post(publication).then();
           modalContainer.style.display = 'none';
         }
