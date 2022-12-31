@@ -26,7 +26,7 @@ export const Post = (muroDiv) => {
         </div>
         ${auth.currentUser.uid === coment2.uid ? `<button class = 'btnEdit' 
         data-id =${doc.id}>
-        <span class="material-symbols-outlined span"><img src="img/edit.png" 
+        <span class="material-symbols-outlined span"><img src="https://raw.githubusercontent.com/ErikaDUARTEm/DEV001-social-network/main/src/img/edit.png" 
         alt="editar" class="editar"></span></button>` : ''}
         </div> 
         <div class= 'comment-publish'>
@@ -40,7 +40,7 @@ export const Post = (muroDiv) => {
         </button>
         ${auth.currentUser.uid === coment2.uid ? `<button class='btnDelete'
         data-id = ${doc.id}>
-        <span class='material-symbols-outlined'><img src='img/delete.png' 
+        <span class='material-symbols-outlined'><img src='https://raw.githubusercontent.com/ErikaDUARTEm/DEV001-social-network/main/src/img/delete.png' 
         alt='delete'class='delete'></span></button>` : ''}
         </div>
         </div>`;
@@ -48,6 +48,8 @@ export const Post = (muroDiv) => {
       const btn = muro2.querySelectorAll('.btnEdit');
       btn.forEach((edit) => {
         edit.addEventListener('click', () => {
+          const editarPost = muroDiv.querySelector('.editarPost');
+          editarPost.style.display = 'none';
           const id = edit.dataset.id;
           getPost(id).then((promise) => {
             const coment = promise.data().coment;

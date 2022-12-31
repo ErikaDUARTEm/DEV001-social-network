@@ -12,7 +12,7 @@ export const modalComment = (muroDiv) => {
       modalContainer.innerHTML = `
           <div class='content-modal'>
           <div class= 'cancel'>
-          <span class="material-symbols-outlined"><img src='img/cancel.png' class='cerrar'></span>
+          <span class="material-symbols-outlined"><img src='https://raw.githubusercontent.com/ErikaDUARTEm/DEV001-social-network/main/src/img/cancel.png' class='cerrar'></span>
           </div>
           <div class= 'user-content'>
           <span class= 'userActive'><img src='${auth.currentUser.photoURL}' 

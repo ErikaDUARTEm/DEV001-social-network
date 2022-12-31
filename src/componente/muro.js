@@ -10,13 +10,13 @@ export const Muro = () => {
   muroDiv.innerHTML = `
   <header class="encabezado">
   <nav>
-    <img class="logoMuro" src="img/logo.png" alt="logo">
-    <span class="hambur material-symbols-outlined"><img src="img/menu_open.png" alt="menu" class="hambur material-symbols-outlined"></span>
+    <img class="logoMuro" src="https://raw.githubusercontent.com/ErikaDUARTEm/DEV001-social-network/main/src/img/logo.png" alt="logo">
+    <span class="hambur material-symbols-outlined"><img src="https://raw.githubusercontent.com/ErikaDUARTEm/DEV001-social-network/main/src/img/menu_open.png" alt="menu" class="hambur material-symbols-outlined"></span>
     <nav class='menu-navegacion'>
       <a class='cerrarSesion'><strong>Cerrar Sesión</strong></a>
     </nav>
     <span class='desktop'>
-      <a class='desktop'><img src="img/home.png" alt="home" class="home"></a>
+      <a class='desktop'><img src="https://raw.githubusercontent.com/ErikaDUARTEm/DEV001-social-network/main/src/img/home.png" alt="home" class="home"></a>
       <a class='cerrarSesion'><strong>Cerrar Sesión</strong></a>
     </span>
     </nav>
@@ -30,8 +30,8 @@ export const Muro = () => {
   <section class='modal'></section>
   <footer>
   <nav class="footer">
-    <span class="material-symbols-outlined"><img src="img/home.png" alt="home" class="home"></span>
-    <span class="material-symbols-outlined"><img src="img/add_box.png" alt="agregar" class="add"></span>
+    <span class="material-symbols-outlined"><img src="https://raw.githubusercontent.com/ErikaDUARTEm/DEV001-social-network/main/src/img/home.png" alt="home" class="home"></span>
+    <span class="material-symbols-outlined"><img src="https://raw.githubusercontent.com/ErikaDUARTEm/DEV001-social-network/main/src/img/add_box.png" alt="agregar" class="add"></span>
     <span class="material-symbols-outlined"><img src="${auth.currentUser.photoURL}"  alt="cuenta" class="account"></span>
     </nav>
   </footer>
