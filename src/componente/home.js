@@ -15,8 +15,8 @@ export const Home = () => {
   </div>
   <div class = "plantilla">
   <div class= "images">
-    <img class="logo" src="img/logo.png" alt="logo">
-    <img class="girl" src="img/una.png" alt="girl">
+    <img class="logo" src="https://raw.githubusercontent.com/ErikaDUARTEm/DEV001-social-network/main/src/img/logo.png" alt="logo" alt="logo">
+    <img class="girl" src="https://raw.githubusercontent.com/ErikaDUARTEm/DEV001-social-network/main/src/img/una.png" alt="girl">
   </div>
   <div class = "inputHome">
     <form class = "formHome">
@@ -54,7 +54,7 @@ export const Home = () => {
   const google = document.createElement('div');
   google.classList.add('enlaces');
   const imgGoogle = document.createElement('img');
-  imgGoogle.src = 'img/google.png';
+  imgGoogle.src = 'https://raw.githubusercontent.com/ErikaDUARTEm/DEV001-social-network/main/src/img/google.png';
   contenedorEnlace.appendChild(google);
 
   const linkGoogle = document.createElement('a');

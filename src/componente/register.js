@@ -14,7 +14,7 @@ export const Register = () => {
   </div>
   <article class = "plantilla">
    <div class= "images">
-    <img class="logo" src="img/logo.png" alt="">
+    <img class="logo" src=""https://raw.githubusercontent.com/ErikaDUARTEm/DEV001-social-network/main/src/img/logo.png" alt="logo" alt="logo"" alt="">
     <p class= "mensaje">Únete a nuestra comunidad y construye amistades que ven desde el corazón.</p>
    </div>
    
