@@ -1,5 +1,5 @@
 
-![](url=https://postimg.cc/nM7bT8Vm][img]https://i.postimg.cc/nM7bT8Vm/logo.png[/img][/url)
+![](https://postimg.cc/nM7bT8Vm][img]https://i.postimg.cc/nM7bT8Vm/logo.png[/img])
 
 # Preámbulo
 
