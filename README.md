@@ -1,5 +1,5 @@
 
-![](https://postimages.org/][img]https://i.postimg.cc/n988Z22M/google.png)
+![](https://github.com/Gabawong/DEV001-social-network/blob/main/src/img/logo.png)
 
 # Preámbulo
 
