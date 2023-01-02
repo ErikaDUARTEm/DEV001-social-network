@@ -5,7 +5,7 @@
 
 Down Family es una red social dirigida a padres o familias con niños que tienen Síndrome de Down. El objetivo es interactuar y compartir información sobre temas de Síndrome de Down para aprender de las experiencias y acompañarse en este mundo que busca la inclusión social.
 
-##Historia de usuario 1
+## Historia de usuario 1
 
 El usuario busca una comunidad con la que pueda interactuar y compartir información sobre su niñ@ con sindrome de Down, al encontrarla este usuario podrá ingresar a la red social y crear una cuenta con su correo y contraseña.
 
