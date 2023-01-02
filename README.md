@@ -1,5 +1,5 @@
 
-![](https://postimg.cc/nM7bT8Vm][img]https://i.postimg.cc/nM7bT8Vm/logo.png[/img])
+![](https://github.com/Gabawong/DEV001-social-network/blob/main/src/img/logo.png)
 
 # Preámbulo
 
