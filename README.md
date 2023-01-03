@@ -39,6 +39,7 @@ El usuario una vez que haya ingresado con su cuenta ya registrada, podrá visual
 #### Tablet
 ![](https://raw.githubusercontent.com/Gabawong/DEV001-social-network/main/src/img/HU2%20-%20PAF%20-%20Tablet.png)
 #### Desktop
+![] (https://raw.githubusercontent.com/Gabawong/DEV001-social-network/main/src/img/HU2%20-%20PAF%20-%20Desktop.png)
 
 ##Historia de usuario 3
 
@@ -56,4 +57,5 @@ Este usuario ahora puede editar  y/o eliminar los comentarios que fueron publica
 #### Tablet
 ![](https://raw.githubusercontent.com/Gabawong/DEV001-social-network/main/src/img/HU3%20-%20PAF%20-%20Tablet.png)
 #### Desktop
+![] (https://raw.githubusercontent.com/Gabawong/DEV001-social-network/main/src/img/HU3%20-%20PAF%20-%20Desktop.png)
 
