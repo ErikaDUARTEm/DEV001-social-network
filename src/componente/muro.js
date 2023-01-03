@@ -21,7 +21,7 @@ export const Muro = () => {
     </span>
     </nav>
   </header>
-  <section class="editarPost"> 
+  <section class="editarPost">
     <span class="material-symbols-outlined"><img src="${auth.currentUser.photoURL}"  alt="cuenta" class="account"></span>
     <div class="add publicarPost">¿Qué estás pensando?</div>
   </section>

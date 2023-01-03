@@ -48,8 +48,6 @@ export const Post = (muroDiv) => {
       const btn = muro2.querySelectorAll('.btnEdit');
       btn.forEach((edit) => {
         edit.addEventListener('click', () => {
-          const editarPost = muroDiv.querySelector('.editarPost');
-          editarPost.style.display = 'none';
           const id = edit.dataset.id;
           getPost(id).then((promise) => {
             const coment = promise.data().coment;
@@ -73,7 +71,6 @@ export const Post = (muroDiv) => {
             const comentEdit = muro2.querySelector('.newPost');
             const buttonEdit = muro2.querySelector('.publish');
             buttonEdit.addEventListener('click', () => {
-              editarPost.style.display = 'flex';
               const newPost = {};
               newPost.coment = comentEdit.value;
               update(id, newPost);

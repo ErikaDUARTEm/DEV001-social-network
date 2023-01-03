@@ -265,12 +265,6 @@ button:active {
     background: transparent;
     border: none;  
 }
-.editarPost > div{
-    display: none;
-}
-.editarPost{
-    display: none;
-}
 .mensaje {
     font-size: 20px;
     font-family: 'Fira Sans Condensed', sans-serif;
@@ -457,6 +451,9 @@ button.publish {
 span.desktop {
     display: none;
 }
+.editarPost {
+    display: none;
+}
 @media screen and (min-width:900px) {
     body {
         width: 100vw;
@@ -512,7 +509,6 @@ span.desktop {
 
     }
 
- 
     .form-register {
         width: 100%;
         height: 40px;
@@ -535,10 +531,9 @@ span.desktop {
     .publicacion {
         display: none;
     }
-    /* .desktop {
+    .desktop {
         display: none;
-    } */
-    
+    }  
 }
 
 @media screen and (min-width: 1024px) {
@@ -702,7 +697,7 @@ span.desktop {
     .publicacion {
         display: flex;
     }
-    .editarPost{
+    .editarPost {
         display:flex;
         flex-direction: row;
         justify-content:space-evenly;
@@ -712,8 +707,7 @@ span.desktop {
         background-color: white;
     }
     
-     .editarPost > div{
-        display: flex;
+    .editarPost >div {
         width: 70%;
         justify-content: center;
         align-items: center;
