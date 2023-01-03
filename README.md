@@ -23,7 +23,7 @@ El usuario busca una comunidad con la que pueda interactuar y compartir informac
 #### Desktop
 ![](https://raw.githubusercontent.com/Gabawong/DEV001-social-network/main/src/img/HU1%20-%20PAF%20-%20%20Desktop.png)
 
-##Historia de usuario 2
+## Historia de usuario 2
 
 El usuario una vez que haya ingresado con su cuenta ya registrada, podrá visualizar el muro de la red social, leer los comentarios que otros usuarios ya publicaron y además podrá realizar publicaciones.
 
@@ -41,7 +41,7 @@ El usuario una vez que haya ingresado con su cuenta ya registrada, podrá visual
 #### Desktop
 ![] (https://raw.githubusercontent.com/Gabawong/DEV001-social-network/main/src/img/HU2%20-%20PAF%20-%20Desktop.png)
 
-##Historia de usuario 3
+## Historia de usuario 3
 
 Este usuario ahora puede editar  y/o eliminar los comentarios que fueron publicados anteriormente; además podrá interactuar con otros comentarios a través del icono like. Finalmente si desea salir de la red social, encontrará un enlace para cerrar sesión.
 
@@ -57,5 +57,5 @@ Este usuario ahora puede editar  y/o eliminar los comentarios que fueron publica
 #### Tablet
 ![](https://raw.githubusercontent.com/Gabawong/DEV001-social-network/main/src/img/HU3%20-%20PAF%20-%20Tablet.png)
 #### Desktop
-![] (https://raw.githubusercontent.com/Gabawong/DEV001-social-network/main/src/img/HU3%20-%20PAF%20-%20Desktop.png)
+![](https://raw.githubusercontent.com/Gabawong/DEV001-social-network/main/src/img/HU3%20-%20PAF%20-%20Desktop.png)
 
