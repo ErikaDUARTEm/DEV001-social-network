@@ -73,6 +73,7 @@ export const Post = (muroDiv) => {
             const comentEdit = muro2.querySelector('.newPost');
             const buttonEdit = muro2.querySelector('.publish');
             buttonEdit.addEventListener('click', () => {
+              editarPost.style.display = 'flex';
               const newPost = {};
               newPost.coment = comentEdit.value;
               update(id, newPost);
