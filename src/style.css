@@ -265,13 +265,12 @@ button:active {
     background: transparent;
     border: none;  
 }
-
+.editarPost > div{
+    display: none;
+}
 .editarPost{
     display: none;
 }
-
-
-
 .mensaje {
     font-size: 20px;
     font-family: 'Fira Sans Condensed', sans-serif;
@@ -714,6 +713,7 @@ span.desktop {
     }
     
      .editarPost > div{
+        display: flex;
         width: 70%;
         justify-content: center;
         align-items: center;
