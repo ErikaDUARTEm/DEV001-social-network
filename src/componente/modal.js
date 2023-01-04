@@ -20,7 +20,7 @@ export const modalComment = (muroDiv) => {
           <span class= 'userName'>${auth.currentUser.displayName}</span>
           </div>
           <form class='comment' id='comment'>
-          <textarea required type='text' class='newPost' placeholder='Escribe un comentario...'></textarea>
+          <textarea required type='text' class='newPost' placeholder='Cuéntanos tu historia...'></textarea>
           <button type='button' class='publish'>Publicar</button>
           </form>
           </div>

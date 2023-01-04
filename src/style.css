@@ -531,9 +531,6 @@ span.desktop {
     .publicacion {
         display: none;
     }
-    .desktop {
-        display: none;
-    }  
 }
 
 @media screen and (min-width: 1024px) {
