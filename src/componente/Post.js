@@ -11,21 +11,21 @@ export const Post = (muroDiv) => {
   listener((res) => {
     const muro2 = muroDiv.querySelector('.muro');
     let html = '';
-    const comentOrder = [];
-    res.forEach((doc) => {
-      const coment2 = doc.data();
-      comentOrder.push(coment2);
-      // const order = comentOrder.sort((a, b) => b.fecha - a.fecha);
+    const resSortedArr = [];
+    res.forEach((doc) => resSortedArr.push({ referece: doc, data: doc.data() }));
+    resSortedArr.sort((a, b) => b.data.fecha - a.data.fecha);
+    resSortedArr.forEach((docObj) => {
+      const coment2 = docObj.data;
       html += `
         <div class='container-comment'>
         <div class= 'user-content'>
         <div class= 'content'>
         <span class= 'userActive'><img src='${coment2.photo}' 
-        alt='cuenta' class='account'></span>
+        alt='cuenta' referrerpolicy="no-referrer" class='account'></span>
         <span class= 'userName'>${coment2.name} </span>
         </div>
         ${auth.currentUser.uid === coment2.uid ? `<button class = 'btnEdit' 
-        data-id =${doc.id}>
+        data-id =${docObj.referece.id}>
         <span class="material-symbols-outlined span"><img src="https://raw.githubusercontent.com/ErikaDUARTEm/DEV001-social-network/main/src/img/edit.png" 
         alt="editar" class="editar"></span></button>` : ''}
         </div> 
@@ -33,13 +33,13 @@ export const Post = (muroDiv) => {
         <p class= 'coment'>${coment2.coment}</p>
         </div>
         <div class='iconos'>
-        <button class='buttonLike' data-id = ${doc.id}>
+        <button class='buttonLike' data-id = ${docObj.referece.id}>
         <span class='icon'><i class="fa-regular fa-heart like ${coment2.likes.includes(auth.currentUser.email) ? 'true' : 'false'}"></i>
         </span>
         <span class='count'>${coment2.likes.length}</span>
         </button>
         ${auth.currentUser.uid === coment2.uid ? `<button class='btnDelete'
-        data-id = ${doc.id}>
+        data-id = ${docObj.referece.id}>
         <span class='material-symbols-outlined'><img src='https://raw.githubusercontent.com/ErikaDUARTEm/DEV001-social-network/main/src/img/delete.png' 
         alt='delete'class='delete'></span></button>` : ''}
         </div>
